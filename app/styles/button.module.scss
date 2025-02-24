@@ -1,0 +1,64 @@
+.btn {
+  padding: 1.5rem 3rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  border: none;
+
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+  }
+
+  &.--one {
+    color: var(--c-white);
+    background-color: var(--c-main);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-button-one-hover);
+    }
+  }
+
+  &.--two {
+    color: var(--c-font-and-button-two-hover);
+    background-color: transparent;
+    border: 1px solid currentColor;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--c-white);
+      background-color: var(--c-font-and-button-two-hover);
+      border-color: transparent;
+    }
+  }
+
+  &.--three {
+    position: relative;
+    padding: 0;
+    //margin-right: 1.33rem;
+    color: var(--c-font-transparent);
+    background-color: transparent;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--c-main);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-block;
+      margin-left: 1.33rem;
+      width: 0.8rem;
+      height: 1rem;
+      background-image: url("../assets/shared/desktop/icon-arrow-right.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}

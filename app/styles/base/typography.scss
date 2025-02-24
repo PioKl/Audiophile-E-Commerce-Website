@@ -1,0 +1,61 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--c-font-and-button-two-hover);
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 5.6rem;
+  line-height: 1;
+  letter-spacing: 0.2rem;
+}
+
+h2 {
+  font-size: 4rem;
+  line-height: 1.1;
+  letter-spacing: 0.143rem;
+}
+
+h3 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.114rem;
+}
+
+h4 {
+  font-size: 2.8rem;
+  line-height: normal;
+  letter-spacing: 0.2rem;
+}
+
+h5 {
+  font-size: 2.4rem;
+  line-height: normal;
+  letter-spacing: 0.171rem;
+}
+
+h6 {
+  font-size: 1.8rem;
+  line-height: normal;
+  letter-spacing: 0.129rem;
+}
+
+.overline {
+  color: var(--c-main);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1rem;
+}
+
+.sub-title {
+  color: var(--c-main);
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.9;
+  letter-spacing: 0.093rem;
+}
