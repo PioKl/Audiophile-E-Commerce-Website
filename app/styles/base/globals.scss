@@ -5,11 +5,12 @@
 :root {
   --c-main: #d87d4a;
   --c-button-one-hover: #fbaf85;
-  --c-font-and-button-two-hover: #000000;
-  --c-font-transparent: #00000080; //128/255 ≈ 50%
+  --c-text-and-button-two-hover: #000000;
+  --c-text-transparent: #00000080; //128/255 ≈ 50%
   --c-background-one: #fafafa;
   --c-background-two: #101010;
-  --c-white: #ffffff;
+  --c-text: #ffffff;
+  --c-text-transparent: #ffffff80;
   --c-product-background: #f1f1f1;
   --c-form-error: #cd2c2c;
 
