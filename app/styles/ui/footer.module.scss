@@ -1,0 +1,130 @@
+@use "../base/resolutions.scss" as *;
+
+$gap: 4.8rem;
+
+.footer {
+  background-color: var(--c-background-two);
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-block: 5.2rem 3.8rem;
+  gap: $gap;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10.1rem;
+    height: 0.4rem;
+    background-color: var(--c-main);
+
+    @include tablet {
+      left: 0;
+      transform: translateX(0);
+    }
+  }
+
+  @include tablet {
+    padding-block: 6rem 4.8rem;
+    gap: 3.2rem;
+  }
+
+  @include desktopSmall {
+    padding-top: 7.5rem;
+    gap: 3.6rem;
+  }
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $gap;
+
+    @include tablet {
+      align-items: start;
+    }
+
+    @include desktopSmall {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  &__links-list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.6rem;
+    color: var(--c-text);
+
+    @include tablet {
+      flex-direction: row;
+      gap: 3.4rem;
+    }
+  }
+
+  &__description-and-social {
+    display: grid;
+    justify-items: center;
+    gap: $gap;
+
+    @include tablet {
+      grid-auto-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "a a"
+        "b c";
+      gap: 8rem;
+      align-items: center;
+      justify-items: start;
+    }
+
+    @include desktopSmall {
+      grid-template-columns: 54rem 1fr;
+      grid-template-areas:
+        "a c"
+        "b c";
+      gap: 5.6rem;
+    }
+  }
+
+  &__description,
+  &__copyright {
+    color: var(--c-text-transparent);
+    text-align: center;
+  }
+
+  &__description {
+    @include tablet {
+      grid-area: a;
+      text-align: left;
+    }
+  }
+
+  &__copyright {
+    display: inline-block;
+
+    @include desktopSmall {
+      grid-area: b;
+    }
+  }
+
+  &__social-list {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+
+    @include tablet {
+      justify-self: end;
+    }
+
+    @include desktopSmall {
+      grid-area: c;
+    }
+  }
+}
