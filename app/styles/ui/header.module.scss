@@ -1,0 +1,69 @@
+@use "../base/resolutions.scss" as *;
+
+.header {
+  background-color: var(--c-background-two);
+}
+
+.container {
+  position: relative;
+  padding-block: 3.3rem;
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+
+    @include tablet {
+      justify-content: start;
+    }
+  }
+  &__nav-button {
+    background-color: transparent;
+    border: none;
+    &:hover,
+    &:focus-visible {
+      cursor: pointer;
+    }
+  }
+
+  &__burger-button {
+    @include tablet {
+      margin-right: 4.2rem;
+    }
+  }
+
+  &__burger-open-button {
+    &[aria-expanded="true"] {
+      display: none;
+
+      ~ .nav-menu {
+        translate: 0;
+
+        @media (prefers-reduced-motion) {
+          opacity: 1;
+        }
+      }
+    }
+
+    &[aria-expanded="false"] {
+      + .container__burger-close-button {
+        display: none;
+      }
+    }
+  }
+
+  &__cart-button {
+    @include tablet {
+      margin-left: auto;
+    }
+  }
+}
+
+.nav-menu {
+  position: fixed;
+  z-index: 1;
+  background-color: var(--c-background-one);
+  top: 9.1rem;
+  right: 0;
+  width: 100%;
+  translate: 100vw 0;
+  transition: translate 0.5s ease-in-out;
+}
