@@ -13,7 +13,7 @@
   }
 
   &.--one {
-    color: var(--c-white);
+    color: var(--c-text);
     background-color: var(--c-main);
 
     &:hover,
@@ -23,14 +23,14 @@
   }
 
   &.--two {
-    color: var(--c-font-and-button-two-hover);
+    color: var(--c-text-and-button-two-hover);
     background-color: transparent;
     border: 1px solid currentColor;
 
     &:hover,
     &:focus-visible {
-      color: var(--c-white);
-      background-color: var(--c-font-and-button-two-hover);
+      color: var(--c-text);
+      background-color: var(--c-text-and-button-two-hover);
       border-color: transparent;
     }
   }
@@ -38,8 +38,7 @@
   &.--three {
     position: relative;
     padding: 0;
-    //margin-right: 1.33rem;
-    color: var(--c-font-transparent);
+    color: var(--c-text-transparent);
     background-color: transparent;
 
     &:hover,
