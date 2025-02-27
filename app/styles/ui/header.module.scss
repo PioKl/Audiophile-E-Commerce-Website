@@ -14,6 +14,10 @@
     @include tablet {
       justify-content: start;
     }
+
+    @include desktopSmall {
+      justify-content: space-between;
+    }
   }
   &__nav-button {
     background-color: transparent;
@@ -27,6 +31,9 @@
   &__burger-button {
     @include tablet {
       margin-right: 4.2rem;
+    }
+    @include desktopSmall {
+      display: none;
     }
   }
 
@@ -54,16 +61,42 @@
     @include tablet {
       margin-left: auto;
     }
+    @include desktopSmall {
+      margin-left: initial;
+    }
   }
 }
 
 .nav-menu {
   position: fixed;
   z-index: 1;
-  background-color: var(--c-background-one);
+  background-color: var(--c-background-transparent);
   top: 9.1rem;
+  bottom: 0;
   right: 0;
+  left: 0;
   width: 100%;
   translate: 100vw 0;
   transition: translate 0.5s ease-in-out;
+
+  @include desktopSmall {
+    position: static;
+    background-color: transparent;
+    width: auto;
+    translate: 0;
+  }
+
+  &__item-list-container {
+    padding-block: 8.1rem 3.5rem;
+    background-color: var(--c-background-one);
+
+    @include tablet {
+      padding-block: 10.9rem 6.7rem;
+    }
+
+    @include desktopSmall {
+      padding-block: 0;
+      background-color: transparent;
+    }
+  }
 }
