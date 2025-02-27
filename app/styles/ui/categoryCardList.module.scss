@@ -1,0 +1,30 @@
+@use "../base/resolutions.scss" as *;
+@use "../base/mixins.scss" as *;
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6.8rem;
+
+  @include tablet {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  @include desktopSmall {
+    &.--menu {
+      width: auto;
+      margin-inline: initial;
+      gap: 3.2rem;
+    }
+  }
+
+  &__home-link {
+    display: none;
+
+    @include desktopSmall {
+      display: initial;
+    }
+  }
+}
