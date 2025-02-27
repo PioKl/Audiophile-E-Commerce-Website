@@ -1,0 +1,68 @@
+@use "../base/resolutions.scss" as *;
+
+.card-container {
+  position: relative;
+  padding-block: 7rem 2.2rem;
+  text-align: center;
+  border-radius: 0.8rem;
+  background-color: var(--c-product-background);
+  @include tablet {
+    width: 100%;
+  }
+
+  @include desktopSmall {
+    &.--menu {
+      padding-block: 0;
+      background-color: transparent;
+    }
+  }
+  &__image-container {
+    position: absolute;
+    top: -3.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10.3rem;
+    height: 10.4rem;
+    margin-inline: auto;
+
+    @include desktopSmall {
+      width: 12.5rem;
+      height: 12.6rem;
+
+      &.--menu {
+        display: none;
+      }
+    }
+  }
+  &__image {
+    object-fit: cover;
+  }
+  &__category-name {
+    display: block;
+    margin-bottom: 1.7rem;
+    text-transform: uppercase;
+    line-height: initial;
+    letter-spacing: 0.107rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    &.--menu {
+      @include desktopSmall {
+        display: none;
+      }
+    }
+  }
+
+  &__menu-link {
+    display: none;
+    @include desktopSmall {
+      display: initial;
+    }
+  }
+
+  &__link {
+    @include desktopSmall {
+      display: none;
+    }
+  }
+}
