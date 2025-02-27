@@ -61,7 +61,9 @@ h6 {
 }
 
 .nav-link {
+  color: var(--c-text);
   font-size: 1.3rem;
+  font-weight: bold;
   line-height: 1.9;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
