@@ -6,25 +6,30 @@ import IconInstagram from "@/assets/shared/desktop/icon-instagram.svg";
 import styles from "@/styles/ui/footer.module.scss";
 
 interface FooterProps {
+  footerRef: React.RefObject<HTMLDivElement | null>;
   categories: string[];
 }
 
-export default function Footer({ categories }: FooterProps) {
+export default function Footer({ footerRef, categories }: FooterProps) {
   console.log(categories);
   return (
-    <footer className={styles.footer}>
+    <footer ref={footerRef} className={styles.footer}>
       <div className={`wrapper ${styles.container}`}>
         <nav className={styles["container__nav"]}>
           <Link href="/">
             <Logo />
           </Link>
-          <ul className={`nav-link ${styles["container__links-list"]}`}>
-            <li>
-              <Link href="/">Home</Link>
+          <ul className={` ${styles["container__links-list"]}`}>
+            <li className={styles["container__link-item"]}>
+              <Link className="nav-link" href="/">
+                Home
+              </Link>
             </li>
             {categories.map((item, id) => (
               <li key={id} className={styles["container__link-item"]}>
-                <Link href={`/${item}`}>{item}</Link>
+                <Link className="nav-link" href={`/${item}`}>
+                  {item}
+                </Link>
               </li>
             ))}
           </ul>
