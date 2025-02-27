@@ -1,0 +1,4 @@
+@mixin wrapper {
+  width: min(1110px, calc(100% - 48px));
+  margin-inline: auto;
+}
