@@ -1,0 +1,84 @@
+@use "./base/resolutions.scss" as *;
+
+.hero {
+  height: 51rem;
+  background-image: url(../assets/home/mobile/image-header.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: contain; */
+  background-color: #191919;
+
+  background-size: 35rem;
+  background-position-y: 160%;
+
+  @include tablet {
+    height: 63.9rem;
+    background-image: url(../assets/home/tablet/image-header.jpg);
+    background-size: 81rem;
+    //background-position-y: 81%;
+    background-position-y: 87%;
+  }
+  @include desktopSmall {
+    height: 63.2rem;
+    background-image: url(../assets/home/desktop/image-hero.jpg);
+
+    background-size: 147rem;
+    background-position-y: 85%;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    height: inherit;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 32rem;
+    margin-inline: auto;
+
+    @include tablet {
+      max-width: 37.9rem;
+    }
+
+    @include desktopSmall {
+      max-width: 39.8rem;
+      align-items: start;
+      margin-inline: initial;
+    }
+  }
+
+  &__product-status {
+    margin-bottom: 1.6rem;
+    color: var(--c-text-transparent-alt);
+
+    @include tablet {
+      margin-bottom: 2.4rem;
+    }
+  }
+
+  &__heading,
+  &__info {
+    text-align: center;
+
+    @include desktopSmall {
+      text-align: left;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 2.4rem;
+    color: var(--c-text);
+  }
+
+  &__info {
+    color: var(--c-text-transparent-75);
+    margin-bottom: 2.8rem;
+
+    @include tablet {
+      margin-bottom: 4rem;
+    }
+  }
+}
