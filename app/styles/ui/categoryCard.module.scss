@@ -59,10 +59,4 @@
       display: initial;
     }
   }
-
-  &__link {
-    @include desktopSmall {
-      display: none;
-    }
-  }
 }
