@@ -1,3 +1,4 @@
+@use "./base/resolutions.scss" as *;
 .btn {
   padding: 1.5rem 3rem;
   font-size: 1.3rem;
@@ -48,9 +49,6 @@
 
     &::after {
       content: "";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       display: inline-block;
       margin-left: 1.33rem;
       width: 0.8rem;
@@ -58,6 +56,12 @@
       background-image: url("../assets/shared/desktop/icon-arrow-right.svg");
       background-repeat: no-repeat;
       background-size: contain;
+    }
+
+    &.--nav {
+      @include desktopSmall {
+        display: none;
+      }
     }
   }
 }
