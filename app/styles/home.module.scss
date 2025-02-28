@@ -1,0 +1,16 @@
+@use "./base/resolutions.scss" as *;
+
+.category-card-list-home {
+  margin-top: 9.2rem;
+  margin-bottom: 12rem;
+
+  @include tablet {
+    margin-top: 14.8rem;
+    margin-bottom: 9.6rem;
+  }
+
+  @include desktopSmall {
+    margin-top: 20rem;
+    margin-bottom: 16.8rem;
+  }
+}
