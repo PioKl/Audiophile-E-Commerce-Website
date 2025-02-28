@@ -20,11 +20,19 @@ export default function CategoryCardList({ listType }: CategoryCardListProps) {
 
   return listType === "normal" ? (
     <>
-      <span>Test</span>
+      <ul
+        className={`wrapper ${styles["card-list"]} ${styles[`--${listType}`]}`}
+      >
+        {uniqueCategorysWithImage.map((item, id) => (
+          <CategoryCard type="normal" key={id} categoriesWithImage={item} />
+        ))}
+      </ul>
     </>
   ) : (
     <>
-      <ul className={`wrapper ${styles["card-list"]} ${styles[`--menu`]}`}>
+      <ul
+        className={`wrapper ${styles["card-list"]} ${styles[`--${listType}`]}`}
+      >
         <Link href="/" className={`nav-link ${styles["card-list__home-link"]}`}>
           Home
         </Link>
