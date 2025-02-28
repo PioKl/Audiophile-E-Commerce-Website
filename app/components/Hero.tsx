@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/styles/hero.module.scss";
+import Button from "./Button";
 
 export default function Hero() {
   return (
@@ -16,6 +17,12 @@ export default function Hero() {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
+          <Button
+            buttonType="one"
+            text="See Product"
+            isALink={true}
+            link={`/headphones/xx99-mark-two-headphones`}
+          />
         </div>
       </div>
     </section>
