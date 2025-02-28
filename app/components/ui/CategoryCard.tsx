@@ -38,19 +38,30 @@ export default function CategoryCard({
         {categoriesWithImage.category}
       </span>
       {type === "menu" && (
-        <Link
-          className={`nav-link ${styles["card-container__menu-link"]}`}
-          href={`/${categoriesWithImage.category}`}
-        >
-          {categoriesWithImage.category}
-        </Link>
+        <>
+          <Link
+            className={`nav-link ${styles["card-container__menu-link"]}`}
+            href={`/${categoriesWithImage.category}`}
+          >
+            {categoriesWithImage.category}
+          </Link>
+          <Button
+            buttonType="three"
+            text="Shop"
+            isInNav={true}
+            isALink={true}
+            link={`/${categoriesWithImage.category}`}
+          />
+        </>
       )}
-      <Link
-        className={`${styles["card-container__link"]} ${styles[`--${type}`]}`}
-        href={`/${categoriesWithImage.category}`}
-      >
-        <Button buttonType="three" text="Shop" />
-      </Link>
+      {type === "normal" && (
+        <Button
+          buttonType="three"
+          text="Shop"
+          isALink={true}
+          link={`/${categoriesWithImage.category}`}
+        />
+      )}
     </div>
   );
 }
