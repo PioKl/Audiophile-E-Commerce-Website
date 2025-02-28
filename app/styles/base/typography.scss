@@ -1,3 +1,5 @@
+@use "./resolutions.scss" as *;
+
 h1,
 h2,
 h3,
@@ -9,9 +11,16 @@ h6 {
 }
 
 h1 {
-  font-size: 5.6rem;
-  line-height: 1;
-  letter-spacing: 0.2rem;
+  font-size: 3.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.129rem;
+  text-transform: uppercase;
+
+  @include tablet {
+    font-size: 5.6rem;
+    line-height: 1;
+    letter-spacing: 0.2rem;
+  }
 }
 
 h2 {
@@ -50,6 +59,7 @@ h6 {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1rem;
+  text-transform: uppercase;
 }
 
 .sub-title {
