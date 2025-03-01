@@ -1,0 +1,244 @@
+@use "../base/resolutions.module.scss" as *;
+.product-banner {
+  padding-block: 5.5rem;
+  padding-inline: 2.4rem;
+  border-radius: 0.8rem;
+  background-color: var(--c-main);
+  overflow: hidden;
+
+  &.--two {
+    position: relative;
+    padding-block: 10.1rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+  }
+
+  &.--three {
+    padding-block: 0rem;
+    padding-inline: 0rem;
+    border-radius: 0;
+    background-color: transparent;
+  }
+  @include tablet {
+    padding-block: 5.2rem 6.4rem;
+
+    &.--two {
+      padding-inline: 6.2rem;
+    }
+  }
+  @include desktopSmall {
+    position: relative;
+    padding-block: 13.3rem 12.4rem;
+    padding-inline: 11.7rem 9.5rem;
+
+    &.--two {
+      padding-inline: 9.5rem;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.--two {
+      align-items: start;
+    }
+
+    &.--three {
+      gap: 2.4rem;
+
+      @include tablet {
+        gap: 1.1rem;
+        flex-direction: row;
+        align-items: stretch;
+      }
+    }
+
+    @include desktopSmall {
+      flex-direction: row;
+
+      &.--three {
+        gap: 3rem;
+      }
+    }
+  }
+
+  &__image-container {
+    position: relative;
+
+    &.--two {
+      position: relative;
+      bottom: initial;
+    }
+
+    &.--three {
+      width: 100%;
+      height: 20rem;
+      border-radius: 0.8rem;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      @include tablet {
+        width: 50%;
+        height: 32rem;
+      }
+    }
+
+    @include desktopSmall {
+      position: absolute;
+      bottom: -2%;
+
+      &.--three {
+        position: relative;
+        bottom: initial;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 55.8rem;
+      height: 55.8rem;
+      bottom: -61%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-image: url(../../assets/home/desktop/pattern-circles.svg);
+      background-size: contain;
+
+      @include tablet {
+        width: 99.4rem;
+        height: 99.4rem;
+        bottom: -108%;
+      }
+      @include desktopSmall {
+        bottom: -77%;
+      }
+    }
+
+    &.--two,
+    &.--three {
+      &::before {
+        content: none;
+      }
+    }
+  }
+
+  &__image {
+    width: 17.225rem;
+    height: 20.7rem;
+    margin-bottom: 3.2rem;
+
+    &.--two {
+      margin-bottom: 0;
+    }
+
+    @include tablet {
+      margin-bottom: 6.4rem;
+      &.--two {
+        margin-bottom: 0;
+      }
+    }
+
+    @include desktopSmall {
+      position: relative;
+      z-index: 2;
+      width: 41rem;
+      height: 49.3rem;
+      margin-bottom: 0;
+    }
+  }
+
+  &__product-info {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    max-width: 28rem;
+    color: var(--c-text);
+
+    &.--two,
+    &.--three {
+      gap: 3.2rem;
+      align-items: flex-start;
+    }
+
+    &.--two {
+      max-width: 20.4rem;
+      color: var(--c-text-and-button-two-hover);
+    }
+
+    &.--three {
+      max-width: 100%;
+      width: 100%;
+      padding-block: 4.1rem;
+      padding-inline: 2.4rem;
+      border-radius: 0.8rem;
+      background-color: var(--c-product-background);
+    }
+
+    @include tablet {
+      gap: 0;
+
+      &.--three {
+        width: 50%;
+        padding-inline: 4.1rem;
+        justify-content: center;
+      }
+    }
+    @include desktopSmall {
+      align-items: start;
+      max-width: 34.9rem;
+      margin-left: auto;
+
+      &.--two {
+        margin-left: initial;
+      }
+
+      &.--three {
+        padding-inline: 9.5rem;
+      }
+    }
+  }
+
+  &__product-heading,
+  &__product-description {
+    text-align: center;
+
+    &.--two {
+      text-align: left;
+    }
+
+    @include desktopSmall {
+      text-align: left;
+    }
+  }
+
+  &__product-heading {
+    &.--three {
+      color: var(--c-text-and-button-two-hover);
+    }
+    @include tablet {
+      margin-bottom: 2.4rem;
+
+      &.--two,
+      &.--three {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__product-description {
+    color: var(--c-text-transparent-75);
+    &.--two {
+      color: var(--c-text-and-button-two-hover);
+    }
+    @include tablet {
+      margin-bottom: 4rem;
+    }
+  }
+}
