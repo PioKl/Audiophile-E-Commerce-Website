@@ -14,3 +14,18 @@
     margin-bottom: 16.8rem;
   }
 }
+
+.product-banner-list {
+  display: grid;
+  gap: 2.4rem;
+  margin-bottom: 12rem;
+  @include tablet {
+    gap: 3.2rem;
+    margin-bottom: 9.6rem;
+  }
+
+  @include desktopSmall {
+    gap: 4.8rem;
+    margin-bottom: 20rem;
+  }
+}
