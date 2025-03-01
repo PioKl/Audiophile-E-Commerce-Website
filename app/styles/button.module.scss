@@ -64,4 +64,17 @@
       }
     }
   }
+
+  &.--four {
+    color: var(--c-text);
+    background-color: var(--c-text-and-button-two-hover);
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--c-text-and-button-two-hover);
+      background-color: transparent;
+      border-color: currentColor;
+    }
+  }
 }
