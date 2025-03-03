@@ -1,0 +1,53 @@
+@use "../base/resolutions.module.scss" as *;
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  @include tablet {
+    gap: 6.3rem;
+    align-items: center;
+  }
+
+  @include desktopSmall {
+    flex-direction: row-reverse;
+    gap: 3rem;
+  }
+
+  &__image-container {
+    @include desktopSmall {
+      width: 50%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 0.8rem;
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.2rem;
+    text-align: center;
+
+    @include desktopSmall {
+      width: 50%;
+
+      text-align: left;
+    }
+  }
+  &__info-heading,
+  &__info-text {
+    max-width: 57.3rem;
+    @include desktopSmall {
+      max-width: 44.5rem;
+    }
+  }
+
+  &__info-text {
+    color: var(--c-text-transparent);
+  }
+}
