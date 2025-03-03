@@ -4,25 +4,21 @@ import Image from "next/image";
 import Button from "../Button";
 import { useMediaQuery } from "@mui/material";
 import resolutions from "@/styles/base/resolutions.module.scss";
-import imageSpeakerDesktop from "@/assets/home/desktop/image-speaker-zx9.png";
-import imageSpeakerTablet from "@/assets/home/tablet/image-speaker-zx9.png";
-import imageSpeakerMobile from "@/assets/home/desktop/image-speaker-zx9.png";
-import imageSpeakerTwoDesktop from "@/assets/home/desktop/image-speaker-zx7.jpg";
-import imageSpeakerTwoTablet from "@/assets/home/tablet/image-speaker-zx7.jpg";
-import imageSpeakerTwoMobile from "@/assets/home/mobile/image-speaker-zx7.jpg";
-
-import imageEarphoneDesktop from "@/assets/home/desktop/image-earphones-yx1.jpg";
-import imageEarphoneTablet from "@/assets/home/tablet/image-earphones-yx1.jpg";
-import imageEarphoneMobile from "@/assets/home/mobile/image-earphones-yx1.jpg";
 
 interface ProductBannerProps {
   type: "one" | "two" | "three";
   productName: string;
+  imageMobile: string;
+  imageTablet: string;
+  imageDesktop: string;
 }
 
 export default function ProductBanner({
   type,
   productName,
+  imageMobile,
+  imageTablet,
+  imageDesktop,
 }: ProductBannerProps) {
   const filteredData = data.filter((item) => item.name === productName);
 
@@ -41,16 +37,16 @@ export default function ProductBanner({
   const isTablet = useMediaQuery(`(min-width: ${resolutions.bpTablet})`);
 
   const backgroundImage = isDesktopSmall
-    ? `url(${imageSpeakerTwoDesktop.src})`
+    ? `url(${imageDesktop})`
     : isTablet
-    ? `url(${imageSpeakerTwoTablet.src})`
-    : `url(${imageSpeakerTwoMobile.src})`;
+    ? `url(${imageTablet})`
+    : `url(${imageMobile})`;
 
   const backgroundImageEarphone = isDesktopSmall
-    ? `url(${imageEarphoneDesktop.src})`
+    ? `url(${imageDesktop})`
     : isTablet
-    ? `url(${imageEarphoneTablet.src})`
-    : `url(${imageEarphoneMobile.src})`;
+    ? `url(${imageTablet})`
+    : `url(${imageMobile})`;
 
   return (
     <>
@@ -61,16 +57,18 @@ export default function ProductBanner({
               <picture>
                 <source
                   media={`(min-width: ${resolutions.bpDesktopSmall})`}
-                  srcSet={imageSpeakerDesktop.src}
+                  srcSet={imageDesktop}
                 />
                 <source
                   media={`(min-width: ${resolutions.bpTablet})`}
-                  srcSet={imageSpeakerTablet.src}
+                  srcSet={imageTablet}
                 />
                 <Image
                   className={styles["product-banner__image"]}
-                  src={imageSpeakerMobile}
+                  src={imageMobile}
                   alt="product-image"
+                  width="0"
+                  height="0"
                   sizes="(max-width: 768px) 100vw, 33vw"
                   quality={100}
                 />
