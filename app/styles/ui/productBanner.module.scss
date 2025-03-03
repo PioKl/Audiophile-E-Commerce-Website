@@ -6,6 +6,10 @@
   background-color: var(--c-main);
   overflow: hidden;
 
+  &.--two,
+  &.--three {
+    background-color: transparent;
+  }
   &.--two {
     position: relative;
     padding-block: 10.1rem;
@@ -18,7 +22,6 @@
     padding-block: 0rem;
     padding-inline: 0rem;
     border-radius: 0;
-    background-color: transparent;
   }
   @include tablet {
     padding-block: 5.2rem 6.4rem;
