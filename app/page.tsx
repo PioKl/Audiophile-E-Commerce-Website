@@ -29,6 +29,7 @@ export default function Home() {
         <ProductBanner
           type="three"
           productName="YX1 Earphones"
+          slug="yx1-earphones"
           imageMobile="/assets/home/mobile/image-earphones-yx1.jpg"
           imageTablet="/assets/home/tablet/image-earphones-yx1.jpg"
           imageDesktop="/assets/home/desktop/image-earphones-yx1.jpg"
