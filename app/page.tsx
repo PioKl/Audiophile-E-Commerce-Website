@@ -12,9 +12,27 @@ export default function Home() {
         <CategoryCardList listType="normal" />
       </div>
       <section className={styles["product-banner-list-section"]}>
-        <ProductBanner type="one" productName="ZX9 Speaker" />
-        <ProductBanner type="two" productName="ZX7 Speaker" />
-        <ProductBanner type="three" productName="YX1 Earphones" />
+        <ProductBanner
+          type="one"
+          productName="ZX9 Speaker"
+          imageMobile="/assets/home/desktop/image-speaker-zx9.png"
+          imageTablet="/assets/home/tablet/image-speaker-zx9.png"
+          imageDesktop="/assets/home/desktop/image-speaker-zx9.png"
+        />
+        <ProductBanner
+          type="two"
+          productName="ZX7 Speaker"
+          imageMobile="/assets/home/mobile/image-speaker-zx7.jpg"
+          imageTablet="/assets/home/tablet/image-speaker-zx7.jpg"
+          imageDesktop="/assets/home/desktop/image-speaker-zx7.jpg"
+        />
+        <ProductBanner
+          type="three"
+          productName="YX1 Earphones"
+          imageMobile="/assets/home/mobile/image-earphones-yx1.jpg"
+          imageTablet="/assets/home/tablet/image-earphones-yx1.jpg"
+          imageDesktop="/assets/home/desktop/image-earphones-yx1.jpg"
+        />
       </section>
       <section className={styles["feature-section"]}>
         <FeatureBlock
