@@ -8,6 +8,7 @@ import resolutions from "@/styles/base/resolutions.module.scss";
 interface ProductBannerProps {
   type: "one" | "two" | "three";
   productName: string;
+  slug?: string;
   imageMobile: string;
   imageTablet: string;
   imageDesktop: string;
@@ -16,11 +17,15 @@ interface ProductBannerProps {
 export default function ProductBanner({
   type,
   productName,
+  slug,
   imageMobile,
   imageTablet,
   imageDesktop,
 }: ProductBannerProps) {
-  const filteredData = data.filter((item) => item.name === productName);
+  //Jeśli nie jest podany slug to wyszukiwanie po productName, a jeśli jest podany slug to po slug, wynika to z tego, że czasem w data nazwa produktu jest inna od tego jaka nazwa ma być w danym bannerze np. nazwa produktu w data to YX1 Wireless Earphones, a w banerze ma być YX1 Earphones, więc ewentualne wyszukanie po slugu naprawi problem jakby nazwa produktu w data była inna
+  const filteredData = data.filter((item) =>
+    slug ? item.slug === slug : item.name === productName
+  );
 
   const bannerData = filteredData.map(
     ({ slug, category, image, description }) => ({
@@ -167,7 +172,7 @@ export default function ProductBanner({
                 buttonType="two"
                 text="See Product"
                 isALink={true}
-                link={`/`}
+                link={`${bannerData[0].category}/${bannerData[0].slug}`}
               />
             </div>
           </div>
