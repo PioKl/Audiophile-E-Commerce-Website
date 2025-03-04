@@ -1,0 +1,37 @@
+@use "./base/resolutions.module.scss" as *;
+
+.category-title {
+  padding-block: 3.2rem;
+  margin-bottom: 6.4rem;
+  text-align: center;
+  color: var(--c-text);
+  background-color: var(--c-background-two);
+
+  @include tablet {
+    padding-block: 10.5rem 9.7rem;
+    margin-bottom: 12rem;
+  }
+
+  @include desktopSmall {
+    padding-block: 9.8rem;
+    margin-bottom: 16rem;
+  }
+}
+
+.category-card-list {
+  margin-top: 5.2rem;
+  margin-bottom: 12rem;
+
+  @include desktopSmall {
+    margin-top: 13.2rem;
+    margin-bottom: 16rem;
+  }
+}
+
+.category-products-section {
+  margin-bottom: 12rem;
+
+  @include desktopSmall {
+    margin-bottom: 16rem;
+  }
+}
