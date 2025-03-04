@@ -1,0 +1,68 @@
+@use "../base/resolutions.module.scss" as *;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+
+  @include tablet {
+    gap: 5.2rem;
+  }
+
+  @include desktopSmall {
+    flex-direction: row;
+    align-items: center;
+    gap: 12.5rem;
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+  }
+  &__image {
+    width: 100%;
+    border-radius: 0.8rem;
+  }
+
+  &__product-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    max-width: 32.7rem;
+    margin-inline: auto;
+    text-align: center;
+
+    @include tablet {
+      gap: 0;
+      max-width: 57.2rem;
+    }
+
+    @include desktopSmall {
+      align-items: start;
+      max-width: 44.5rem;
+      text-align: start;
+    }
+  }
+
+  &__product-info-status {
+    @include tablet {
+      margin-bottom: 1.6rem;
+    }
+  }
+  &__product-info-heading {
+    @include tablet {
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  &__product-info-description {
+    color: var(--c-text-transparent);
+
+    @include tablet {
+      margin-bottom: 2.4rem;
+    }
+    @include desktopSmall {
+      margin-bottom: 4rem;
+    }
+  }
+}
