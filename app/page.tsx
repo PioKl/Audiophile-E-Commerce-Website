@@ -1,5 +1,5 @@
 "use client";
-import styles from "./styles/home.module.scss";
+
 import Hero from "./components/Hero";
 import CategoryCardList from "./components/ui/CategoryCardList";
 import ProductBanner from "./components/ui/ProductBanner";
@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className={styles["category-card-list-home"]}>
+      <div className="category-card-list">
         <CategoryCardList listType="normal" />
       </div>
-      <section className={styles["product-banner-list-section"]}>
+      <section className="product-banner-list-section">
         <ProductBanner
           type="one"
           productName="ZX9 Speaker"
@@ -35,7 +35,7 @@ export default function Home() {
           imageDesktop="/assets/home/desktop/image-earphones-yx1.jpg"
         />
       </section>
-      <section className={styles["feature-section"]}>
+      <section className="feature-section">
         <FeatureBlock
           heading="Bringing you the best audio gear"
           headingWordToColor={4}
