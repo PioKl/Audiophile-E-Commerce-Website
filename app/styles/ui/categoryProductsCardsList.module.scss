@@ -1,0 +1,10 @@
+@use "../base/resolutions.module.scss" as *;
+.products-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+
+  @include desktopSmall {
+    gap: 16rem;
+  }
+}
