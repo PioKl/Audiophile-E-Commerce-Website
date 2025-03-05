@@ -37,9 +37,16 @@ h2 {
 }
 
 h3 {
-  font-size: 3.2rem;
-  line-height: 1.1;
-  letter-spacing: 0.114rem;
+  font-size: 2.4rem;
+  line-height: 1.5;
+  letter-spacing: 0.86px;
+  text-transform: uppercase;
+
+  @include tablet {
+    font-size: 3.2rem;
+    line-height: 1.1;
+    letter-spacing: 0.114rem;
+  }
 }
 
 h4 {
