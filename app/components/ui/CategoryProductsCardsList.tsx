@@ -7,7 +7,7 @@ interface CategoryProductsCardsListProps {
   data: CategoryProduct[];
 }
 
-export default function CategoryProductCardsList({
+export default function CategoryProductsCardsList({
   data,
 }: CategoryProductsCardsListProps) {
   return (
