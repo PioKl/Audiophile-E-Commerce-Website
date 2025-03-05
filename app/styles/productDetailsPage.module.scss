@@ -1,0 +1,30 @@
+@use "./base/resolutions.module.scss" as *;
+
+.product-details-also-like-section {
+  &__heading {
+    margin-bottom: 4rem;
+    text-align: center;
+
+    @include tablet {
+      margin-bottom: 5.6rem;
+    }
+
+    @include desktopSmall {
+      margin-bottom: 6.4rem;
+    }
+  }
+  &__also-like-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5.6rem;
+
+    @include tablet {
+      flex-direction: row;
+      gap: 1.1rem;
+    }
+
+    @include desktopSmall {
+      gap: 3rem;
+    }
+  }
+}
