@@ -1,0 +1,64 @@
+@use "../base/resolutions.module.scss" as *;
+
+.product-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8.8rem;
+  margin-bottom: 8.8rem;
+
+  @include tablet {
+    gap: 12rem;
+    margin-bottom: 12rem;
+  }
+  @include desktopSmall {
+    flex-direction: row;
+    gap: 12.5rem;
+    margin-bottom: 16rem;
+  }
+
+  &__features,
+  &__in-the-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  &__features {
+    @include tablet {
+      gap: 3.2rem;
+    }
+    @include desktopSmall {
+      max-width: 63.5rem;
+    }
+  }
+
+  &__features-informations,
+  &__in-the-box-items-list {
+    color: var(--c-text-transparent);
+  }
+
+  &__in-the-box {
+    @include tablet {
+      gap: 16.6rem;
+      flex-direction: row;
+    }
+    @include desktopSmall {
+      gap: 3.2rem;
+      flex-direction: column;
+    }
+  }
+
+  &__in-the-box-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  &__in-the-box-list-item {
+    &.--quantity {
+      margin-right: 2.4rem;
+      color: var(--c-main);
+      font-weight: bold;
+    }
+  }
+}
