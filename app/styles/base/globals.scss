@@ -98,6 +98,16 @@ a {
   }
 }
 
+.category-card-list-pages {
+  margin-top: 17.2rem;
+  margin-bottom: 12rem;
+
+  @include desktopSmall {
+    margin-top: 24rem;
+    margin-bottom: 16rem;
+  }
+}
+
 .product-banner-list-section {
   display: grid;
   gap: 2.4rem;
