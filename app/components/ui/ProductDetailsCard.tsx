@@ -3,6 +3,7 @@ import styles from "@/styles/ui/productDetailsCard.module.scss";
 import Image from "next/image";
 import Button from "../Button";
 import resolutions from "@/styles/base/resolutions.module.scss";
+import data from "@/data/data.json";
 
 interface ProductDetailsCardProps {
   type: "details" | "also-like";
@@ -14,6 +15,21 @@ export default function ProductDetailsCard({
   productDetailsData,
 }: ProductDetailsCardProps) {
   const { image, name, description, price, others } = productDetailsData;
+
+  /*   const findCategoryAndAddIntoOthers = others.map((itemOthers) => {
+    const sameSlug = data.find((itemData) => itemData.slug === itemOthers.slug);
+    if (sameSlug) {
+      return { ...itemOthers, category: sameSlug.category };
+    }
+  }); */
+
+  const findCategoryForOthers = others.map((itemOthers) => {
+    const sameSlug = data.find((itemData) => itemData.slug === itemOthers.slug);
+    if (sameSlug) {
+      return sameSlug.category;
+    }
+  });
+
   return (
     <>
       {type === "details" && (
@@ -102,7 +118,12 @@ export default function ProductDetailsCard({
               <h5 className={styles["product-card__product-info-heading"]}>
                 {item.name}
               </h5>
-              <Button buttonType="one" text="See Product" isALink={false} />
+              <Button
+                buttonType="one"
+                text="See Product"
+                isALink={true}
+                link={`/${findCategoryForOthers[id]}/${item.slug}`}
+              />
             </div>
           </li>
         ))}
