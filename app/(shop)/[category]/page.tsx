@@ -47,9 +47,9 @@ export default async function Category({
       <section className={`wrapper ${styles["category-products-section"]}`}>
         <CategoryProductsCardsList data={sortCategoryDataByNewProduct} />
       </section>
-      <div className={`wrapper ${styles["category-card-list"]}`}>
+      <section className={`wrapper category-card-list-pages`}>
         <CategoryCardList listType="normal" />
-      </div>
+      </section>
       <section className="feature-section">
         <FeatureBlock
           heading="Bringing you the best audio gear"
