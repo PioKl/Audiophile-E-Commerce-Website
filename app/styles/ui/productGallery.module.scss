@@ -1,0 +1,51 @@
+@use "../base/resolutions.module.scss" as *;
+.product-gallery {
+  margin-bottom: 12rem;
+  @include desktopSmall {
+    margin-bottom: 16rem;
+  }
+  &__items-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem 1.8rem;
+    grid-template-areas:
+      "first"
+      "second"
+      "third";
+
+    @include tablet {
+      grid-template-columns: 1fr 1.5fr;
+      grid-template-areas:
+        "first third"
+        "second third";
+    }
+
+    @include desktopSmall {
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+      gap: 3.2rem 3rem;
+    }
+  }
+
+  &__image-container {
+    &[data-id="0"] {
+      grid-area: first;
+    }
+    &[data-id="1"] {
+      grid-area: second;
+    }
+    &[data-id="2"] {
+      grid-area: third;
+    }
+
+    picture {
+      height: 100%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: inherit;
+    border-radius: 0.8rem;
+  }
+}
