@@ -1,6 +1,6 @@
 import { Gallery } from "@/interfaces/interfaces";
 import resolutions from "@/styles/base/resolutions.module.scss";
-import styles from "@/styles/ui/productGalery.module.scss";
+import styles from "@/styles/ui/productGallery.module.scss";
 import Image from "next/image";
 
 interface ProductGalleryProps {
