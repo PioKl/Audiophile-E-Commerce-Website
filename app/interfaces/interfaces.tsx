@@ -33,7 +33,13 @@ export interface Includes {
   item: string;
 }
 
-export interface ProductFeatures {
+export interface Features {
   features: string;
   includes: Includes[];
+}
+
+export interface Gallery {
+  first: ProductImage;
+  second: ProductImage;
+  third: ProductImage;
 }
