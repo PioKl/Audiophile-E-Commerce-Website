@@ -50,7 +50,7 @@ export default async function Category({
       <section className={`wrapper category-card-list-pages`}>
         <CategoryCardList listType="normal" />
       </section>
-      <section className="feature-section">
+      <section className="wrapper feature-section">
         <FeatureBlock
           heading="Bringing you the best audio gear"
           headingWordToColor={4}
