@@ -1,4 +1,6 @@
+"use client";
 import { ProductDetails } from "@/interfaces/interfaces";
+import { useState } from "react";
 import styles from "@/styles/ui/productDetailsCard.module.scss";
 import Image from "next/image";
 import Button from "../Button";
@@ -29,6 +31,18 @@ export default function ProductDetailsCard({
       return sameSlug.category;
     }
   });
+
+  const [counter, setCounter] = useState(1); //Będzie reprezentował liczbę osób rezerwujących stolik
+
+  const handleDecreaseQuantity = () => {
+    setCounter((prevCounter) =>
+      prevCounter > 1 ? prevCounter - 1 : prevCounter
+    );
+  };
+  //Zwiększenie osób
+  const handleIncreaseQuantity = () => {
+    setCounter((prevCounter) => prevCounter + 1);
+  };
 
   return (
     <>
@@ -75,7 +89,30 @@ export default function ProductDetailsCard({
             <h6 className={styles["product-card__product-info-price"]}>
               $ {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h6>
-            <div>
+            <div className={styles["product-card__add-to-cart-container"]}>
+              <div
+                className={
+                  styles["product-card__add-to-cart-quantity-container"]
+                }
+              >
+                <button
+                  onClick={handleDecreaseQuantity}
+                  className={`${styles["product-card__add-to-cart-quantity-button"]}`}
+                >
+                  -
+                </button>
+                <span
+                  className={`${styles["product-card__add-to-cart-quantity"]}`}
+                >
+                  {counter}
+                </span>
+                <button
+                  onClick={handleIncreaseQuantity}
+                  className={`${styles["product-card__add-to-cart-quantity-button"]}`}
+                >
+                  +
+                </button>
+              </div>
               <Button buttonType="one" text="Add to Cart" isALink={false} />
             </div>
           </div>
