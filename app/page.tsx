@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="category-card-list">
+      <div className="wrapper category-card-list">
         <CategoryCardList listType="normal" />
       </div>
       <section className="product-banner-list-section">
@@ -35,7 +35,7 @@ export default function Home() {
           imageDesktop="/assets/home/desktop/image-earphones-yx1.jpg"
         />
       </section>
-      <section className="feature-section">
+      <section className="wrapper feature-section">
         <FeatureBlock
           heading="Bringing you the best audio gear"
           headingWordToColor={4}
