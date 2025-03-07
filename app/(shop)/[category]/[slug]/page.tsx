@@ -6,6 +6,7 @@ import ProductFeatures from "@/components/ui/ProductFeatures";
 import ProductGallery from "@/components/ui/ProductGallery";
 import CategoryCardList from "@/components/ui/CategoryCardList";
 import FeatureBlock from "@/components/ui/FeatureBlock";
+import GoBackButton from "@/components/ui/GoBackButton";
 import styles from "@/styles/productDetailsPage.module.scss";
 
 export async function generateStaticParams() {
@@ -38,7 +39,7 @@ export default async function ProductDetails({
 
   return (
     <div className="wrapper">
-      <span>{resolvedParams.slug}</span>
+      <GoBackButton />
 
       <ProductDetailsCard
         type="details"
