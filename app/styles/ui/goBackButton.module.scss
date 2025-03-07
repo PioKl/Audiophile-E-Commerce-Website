@@ -1,0 +1,22 @@
+@use "../base/resolutions.module.scss" as *;
+
+.go-back {
+  margin-top: 1.6rem;
+  margin-bottom: 2.4rem;
+  color: var(--c-text-transparent);
+  background: transparent;
+  border: none;
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+    color: var(--c-main);
+  }
+
+  @include tablet {
+    margin-top: 3.3rem;
+  }
+  @include desktopSmall {
+    margin-top: 7.9rem;
+    margin-bottom: 5.6rem;
+  }
+}
