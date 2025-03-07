@@ -102,4 +102,34 @@
       margin-bottom: 4.7rem;
     }
   }
+
+  &__add-to-cart-container {
+    display: flex;
+    gap: 1.6rem;
+  }
+
+  &__add-to-cart-quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 12rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: initial;
+    letter-spacing: 0.1rem;
+    background-color: var(--c-product-background);
+  }
+
+  &__add-to-cart-quantity-button {
+    padding: 1.5rem;
+    color: var(--c-text-transparent);
+    background: transparent;
+    border: none;
+
+    &:hover,
+    &:focus-visible {
+      cursor: pointer;
+      color: var(--c-main);
+    }
+  }
 }
