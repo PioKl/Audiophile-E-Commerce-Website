@@ -55,7 +55,7 @@ export default function FeatureBlock({
   };
 
   return (
-    <div className={`wrapper ${styles.feature}`}>
+    <div className={`${styles.feature}`}>
       <div className={styles["feature__image-container"]}>
         <picture>
           <source
