@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Summary from "./Summary";
 import IconCashOnDelivery from "@/assets/checkout/icon-cash-on-delivery.svg";
 import styles from "@/styles/checkout/formCheckout.module.scss";
 
@@ -457,7 +458,7 @@ export default function FormCheckout() {
           </div>
         </div>
       </div>
-      <div>{/* <h3>Summary</h3> */}</div>
+      <Summary />
     </form>
   );
 }
