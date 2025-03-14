@@ -32,7 +32,7 @@ export default function ProductDetailsCard({
     }
   });
 
-  const [counter, setCounter] = useState(1); //Będzie reprezentował liczbę osób rezerwujących stolik
+  const [counter, setCounter] = useState(1);
 
   const handleDecreaseQuantity = () => {
     setCounter((prevCounter) =>
