@@ -39,7 +39,7 @@ export default function ProductDetailsCard({
       prevCounter > 1 ? prevCounter - 1 : prevCounter
     );
   };
-  //Zwiększenie osób
+
   const handleIncreaseQuantity = () => {
     setCounter((prevCounter) => prevCounter + 1);
   };
