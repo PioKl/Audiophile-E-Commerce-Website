@@ -5,6 +5,7 @@ import ClientLayout from "./components/ClientLayout";
 
 const manrope = Manrope({
   subsets: ["latin"],
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.className}`} suppressHydrationWarning={true}>
+        <div id="modal-hook"></div> {/* dla sposobu bez mui modal */}
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
