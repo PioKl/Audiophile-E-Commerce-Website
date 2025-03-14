@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/assets/shared/desktop/logo.svg";
 import BurgerMenu from "@/assets/shared/tablet/icon-hamburger.svg";
@@ -7,6 +7,7 @@ import Cart from "@/assets/shared/desktop/icon-cart.svg";
 import styles from "@/styles/ui/header.module.scss";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import CategoryCardList from "./CategoryCardList";
+import { CartModal } from "../modals/CartModal";
 
 interface HeaderProps {
   mainRef: React.RefObject<HTMLDivElement | null>;
@@ -24,6 +25,19 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
     bodyRef.current = document.body as HTMLBodyElement;
   }, []);
 
+  //Modal
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = () => {
+    setOpenModal(true);
+
+    //Wyłączenie scrolla
+    if (bodyRef.current) {
+      disableBodyScroll(bodyRef.current);
+    }
+  };
+
+  //Menu
   const handleBtnOpen = () => {
     btnOpen.current?.setAttribute("aria-expanded", "true");
 
@@ -126,10 +140,12 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
           </div>
           <button
             className={`${styles["container__nav-button"]} ${styles["container__cart-button"]}`}
+            onClick={handleModal}
           >
             <Cart />
           </button>
         </nav>
+        {openModal && <CartModal setOpenModal={setOpenModal} />}
       </div>
     </header>
   );
