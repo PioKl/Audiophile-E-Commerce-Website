@@ -1,0 +1,108 @@
+@use "../base/resolutions.scss" as *;
+
+.cart {
+  display: grid;
+  gap: 3.2rem;
+}
+
+.cart-top {
+  display: flex;
+  justify-content: space-between;
+
+  &__heading {
+    font-size: 1.8rem;
+    line-height: initial;
+    letter-spacing: 0.129rem;
+  }
+
+  &__remove-button {
+    position: relative;
+    color: var(--c-text-transparent);
+    background: transparent;
+    border: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0.5rem;
+      display: block;
+      width: 100%;
+      height: 0.1rem;
+      background-color: var(--c-border-color);
+    }
+
+    &:hover,
+    &:focus-visible {
+      cursor: pointer;
+      color: var(--c-main);
+
+      &::after {
+        background-color: var(--c-main);
+      }
+    }
+  }
+}
+
+.products-list {
+  display: grid;
+  gap: 2.4rem;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  &__image {
+    border-radius: 0.8rem;
+  }
+}
+
+.product-details {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 9.6rem);
+  align-items: center;
+  column-gap: 1.9rem;
+  width: 100%;
+  font-weight: bold;
+
+  &__cost {
+    color: var(--c-text-transparent);
+  }
+
+  &__quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    background-color: var(--c-product-background);
+    font-size: 1.3rem;
+    line-height: initial;
+    letter-spacing: 0.1rem;
+  }
+
+  &__quantity-button {
+    padding: 0.7rem 1.2rem;
+    color: var(--c-quantity-button-color);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(-1 * (3.2rem - 2.4rem));
+
+  &__price-category {
+    text-transform: uppercase;
+    color: var(--c-text-transparent);
+  }
+  &__price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: initial;
+  }
+}
