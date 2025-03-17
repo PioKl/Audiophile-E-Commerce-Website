@@ -88,6 +88,10 @@
     border: none;
     background: transparent;
     cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      color: var(--c-main);
+    }
   }
 }
 
