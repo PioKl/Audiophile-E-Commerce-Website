@@ -41,7 +41,9 @@ export const Modal = ({ setOpenModal, children }: ModalProps) => {
   return createPortal(
     <div className={`${styles["modal-overlay"]}`}>
       <div className={`wrapper`}>
-        <div className={`${styles["modal"]}`}>{children}</div>
+        <div id="modal" className={`${styles["modal"]}`}>
+          {children}
+        </div>
       </div>
     </div>,
     modalHook
