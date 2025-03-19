@@ -10,10 +10,11 @@ import imageThree from "@/assets/cart/image-yx1-earphones.jpg";
 import Button from "../Button";
 
 interface CartModalProps {
+  openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const CartModal = ({ setOpenModal }: CartModalProps) => {
+export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
   const [counter, setCounter] = useState(1);
 
   const handleDecreaseQuantity = () => {
@@ -27,7 +28,7 @@ export const CartModal = ({ setOpenModal }: CartModalProps) => {
   };
 
   return (
-    <Modal setOpenModal={setOpenModal}>
+    <Modal openModal={openModal} setOpenModal={setOpenModal}>
       <div className={`${styles["cart"]}`}>
         <div className={`${styles["cart-top"]}`}>
           <h2 className={`${styles["cart-top__heading"]}`}>Cart (3)</h2>
