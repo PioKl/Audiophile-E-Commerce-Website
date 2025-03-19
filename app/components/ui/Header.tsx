@@ -27,31 +27,13 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
 
   //Modal
   const [openModal, setOpenModal] = useState(false);
-  const [modalInDom, setModalInDom] = useState(false);
 
   const handleModal = () => {
-    if (modalInDom) {
-      //Włączenie scrolla
-      setOpenModal(false);
-      if (bodyRef.current) {
-        enableBodyScroll(bodyRef.current);
-      }
-    } else {
-      setOpenModal(true);
-      //Wyłączenie scrolla
-      if (bodyRef.current) {
-        disableBodyScroll(bodyRef.current);
-      }
+    setOpenModal(!openModal);
+    if (bodyRef.current) {
+      enableBodyScroll(bodyRef.current);
     }
   };
-
-  useEffect(() => {
-    if (document.getElementById("modal")) {
-      setModalInDom(true);
-    } else {
-      setModalInDom(false);
-    }
-  }, [openModal]);
 
   //Menu
   const handleBtnOpen = () => {
@@ -161,7 +143,9 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
             <Cart />
           </button>
         </nav>
-        {openModal && <CartModal setOpenModal={setOpenModal} />}
+        {openModal && (
+          <CartModal openModal={openModal} setOpenModal={setOpenModal} />
+        )}
       </div>
     </header>
   );
