@@ -24,8 +24,9 @@ export default function OrderConfirmationModal({
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      disableScrollLock={true}
+      disableScrollLock={false}
       className={`${styles["modal"]}`}
+      slotProps={{ backdrop: { style: { backgroundColor: "transparent" } } }}
     >
       <Box className={`${styles["order-container"]}`}>
         <IconOrderConfirmation />
