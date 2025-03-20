@@ -6,12 +6,21 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 interface ModalProps {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  mainRef: React.RefObject<HTMLDivElement | null>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
   children: React.ReactNode;
 }
 
-export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
+export const Modal = ({
+  openModal,
+  setOpenModal,
+  mainRef,
+  footerRef,
+  children,
+}: ModalProps) => {
   const bodyRef = useRef<HTMLBodyElement>(null);
   const modalHook = document.getElementById("modal-hook");
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bodyRef.current = document.body as HTMLBodyElement;
@@ -21,16 +30,23 @@ export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
     if (bodyRef.current) {
       if (openModal) {
         disableBodyScroll(bodyRef.current);
+        //Zablokowanie możliwości interakcji
+        mainRef.current?.setAttribute("inert", "");
+        footerRef.current?.setAttribute("inert", "");
+        modalRef.current?.focus();
       }
     }
-  }, [openModal]);
+  }, [openModal, mainRef, footerRef]);
 
   const handleClose = useCallback(() => {
     setOpenModal(false);
     if (bodyRef.current) {
       enableBodyScroll(bodyRef.current);
+      //Odblokowanie możliwości interakcji
+      mainRef.current?.removeAttribute("inert");
+      footerRef.current?.removeAttribute("inert");
     }
-  }, [setOpenModal]);
+  }, [setOpenModal, mainRef, footerRef]);
 
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
@@ -59,15 +75,15 @@ export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
       <div className={`${styles["modal-container"]}`}>
         <div
           onClick={handleClose}
-          className={`${styles["modal-total-overlay"]}`}
-        ></div>
-        <div
-          onClick={handleClose}
           className={`${styles["modal-overlay"]}`}
         ></div>
-
         <div className={`wrapper ${styles["modal-wrapper"]}`}>
-          <div id="modal" className={`${styles["modal"]}`}>
+          <div
+            tabIndex={0}
+            ref={modalRef}
+            id="modal"
+            className={`${styles["modal"]}`}
+          >
             {children}
           </div>
         </div>
