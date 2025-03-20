@@ -31,7 +31,9 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
   const handleModal = () => {
     setOpenModal(!openModal);
     if (bodyRef.current) {
-      enableBodyScroll(bodyRef.current);
+      //Odblokowanie możliwości interakcji, jest to w przypadku, gdy drugi raz użytkownik przy pomocy klawiatury wciśnie koszyk
+      mainRef.current?.removeAttribute("inert");
+      footerRef.current?.removeAttribute("inert");
     }
   };
 
@@ -79,7 +81,7 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
   };
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 48em)");
+    const media = window.matchMedia("(max-width: 69.375em)");
     const setupNavMenu = () => {
       if (media.matches && navMenu.current) {
         //mobile
@@ -144,7 +146,12 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
           </button>
         </nav>
         {openModal && (
-          <CartModal openModal={openModal} setOpenModal={setOpenModal} />
+          <CartModal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            mainRef={mainRef}
+            footerRef={footerRef}
+          />
         )}
       </div>
     </header>
