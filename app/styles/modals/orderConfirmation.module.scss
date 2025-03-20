@@ -3,6 +3,24 @@
 
 .modal {
   background-color: var(--c-background-transparent);
+
+  @include tablet {
+    background-color: transparent;
+
+    &:after {
+      content: "";
+      position: fixed;
+      z-index: -2;
+      top: 9rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--c-background-transparent);
+      @include tablet {
+        display: block;
+      }
+    }
+  }
 }
 
 .order-container {
