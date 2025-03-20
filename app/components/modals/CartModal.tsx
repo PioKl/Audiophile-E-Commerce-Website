@@ -12,9 +12,16 @@ import Button from "../Button";
 interface CartModalProps {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  mainRef: React.RefObject<HTMLDivElement | null>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
+export const CartModal = ({
+  openModal,
+  setOpenModal,
+  mainRef,
+  footerRef,
+}: CartModalProps) => {
   const [counter, setCounter] = useState(1);
 
   const handleDecreaseQuantity = () => {
@@ -28,7 +35,12 @@ export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
   };
 
   return (
-    <Modal openModal={openModal} setOpenModal={setOpenModal}>
+    <Modal
+      openModal={openModal}
+      setOpenModal={setOpenModal}
+      mainRef={mainRef}
+      footerRef={footerRef}
+    >
       <div className={`${styles["cart"]}`}>
         <div className={`${styles["cart-top"]}`}>
           <h2 className={`${styles["cart-top__heading"]}`}>Cart (3)</h2>
