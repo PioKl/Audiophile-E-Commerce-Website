@@ -1,23 +1,14 @@
 import { useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import styles from "@/styles/ui/modal.module.scss";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 interface ModalProps {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  mainRef: React.RefObject<HTMLDivElement | null>;
-  footerRef: React.RefObject<HTMLDivElement | null>;
   children: React.ReactNode;
 }
 
-export const Modal = ({
-  openModal,
-  setOpenModal,
-  mainRef,
-  footerRef,
-  children,
-}: ModalProps) => {
+export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
   const bodyRef = useRef<HTMLBodyElement>(null);
   const modalHook = document.getElementById("modal-hook");
   const modalRef = useRef<HTMLDivElement>(null);
@@ -29,24 +20,14 @@ export const Modal = ({
   useEffect(() => {
     if (bodyRef.current) {
       if (openModal) {
-        disableBodyScroll(bodyRef.current);
-        //Zablokowanie możliwości interakcji
-        mainRef.current?.setAttribute("inert", "");
-        footerRef.current?.setAttribute("inert", "");
         modalRef.current?.focus();
       }
     }
-  }, [openModal, mainRef, footerRef]);
+  }, [openModal]);
 
   const handleClose = useCallback(() => {
     setOpenModal(false);
-    if (bodyRef.current) {
-      enableBodyScroll(bodyRef.current);
-      //Odblokowanie możliwości interakcji
-      mainRef.current?.removeAttribute("inert");
-      footerRef.current?.removeAttribute("inert");
-    }
-  }, [setOpenModal, mainRef, footerRef]);
+  }, [setOpenModal]);
 
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
