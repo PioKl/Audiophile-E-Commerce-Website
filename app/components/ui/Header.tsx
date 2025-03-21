@@ -30,12 +30,25 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
 
   const handleModal = () => {
     setOpenModal(!openModal);
-    if (bodyRef.current) {
-      //Odblokowanie możliwości interakcji, jest to w przypadku, gdy drugi raz użytkownik przy pomocy klawiatury wciśnie koszyk
-      mainRef.current?.removeAttribute("inert");
-      footerRef.current?.removeAttribute("inert");
-    }
   };
+
+  useEffect(() => {
+    //Modal wyłączanie/włączanie scrolla i inert, czyli włączenie/wyłączenie możliwość interakcji z danymi podstronami
+    if (openModal) {
+      if (bodyRef.current) {
+        disableBodyScroll(bodyRef.current);
+        mainRef.current?.setAttribute("inert", "");
+        footerRef.current?.setAttribute("inert", "");
+      }
+    } else {
+      if (bodyRef.current) {
+        enableBodyScroll(bodyRef.current);
+        //Odblokowanie możliwości interakcji, jest to w przypadku, gdy drugi raz użytkownik przy pomocy klawiatury wciśnie koszyk
+        mainRef.current?.removeAttribute("inert");
+        footerRef.current?.removeAttribute("inert");
+      }
+    }
+  });
 
   //Menu
   const handleBtnOpen = () => {
@@ -146,12 +159,7 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
           </button>
         </nav>
         {openModal && (
-          <CartModal
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-            mainRef={mainRef}
-            footerRef={footerRef}
-          />
+          <CartModal openModal={openModal} setOpenModal={setOpenModal} />
         )}
       </div>
     </header>
