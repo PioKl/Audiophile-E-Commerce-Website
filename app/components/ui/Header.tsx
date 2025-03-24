@@ -4,10 +4,12 @@ import Link from "next/link";
 import Logo from "@/assets/shared/desktop/logo.svg";
 import BurgerMenu from "@/assets/shared/tablet/icon-hamburger.svg";
 import Cart from "@/assets/shared/desktop/icon-cart.svg";
+import IconAuth from "@/assets/shared/desktop/icon-auth.svg";
 import styles from "@/styles/ui/header.module.scss";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import CategoryCardList from "./CategoryCardList";
 import { CartModal } from "../modals/CartModal";
+import AuthModal from "../modals/AuthModal";
 
 interface HeaderProps {
   mainRef: React.RefObject<HTMLDivElement | null>;
@@ -24,31 +26,6 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
   useEffect(() => {
     bodyRef.current = document.body as HTMLBodyElement;
   }, []);
-
-  //Modal
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  };
-
-  useEffect(() => {
-    //Modal wyłączanie/włączanie scrolla i inert, czyli włączenie/wyłączenie możliwość interakcji z danymi podstronami
-    if (openModal) {
-      if (bodyRef.current) {
-        disableBodyScroll(bodyRef.current);
-        mainRef.current?.setAttribute("inert", "");
-        footerRef.current?.setAttribute("inert", "");
-      }
-    } else {
-      if (bodyRef.current) {
-        enableBodyScroll(bodyRef.current);
-        //Odblokowanie możliwości interakcji, jest to w przypadku, gdy drugi raz użytkownik przy pomocy klawiatury wciśnie koszyk
-        mainRef.current?.removeAttribute("inert");
-        footerRef.current?.removeAttribute("inert");
-      }
-    }
-  });
 
   //Menu
   const handleBtnOpen = () => {
@@ -115,6 +92,41 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
     return () => media.removeEventListener("change", setupNavMenu);
   });
 
+  //Modal stan i nasłuchiwanie
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = () => {
+    setOpenModal(!openModal);
+  };
+
+  useEffect(() => {
+    //Modal wyłączanie/włączanie scrolla i inert, czyli włączenie/wyłączenie możliwość interakcji z danymi podstronami
+    if (openModal) {
+      if (bodyRef.current) {
+        disableBodyScroll(bodyRef.current);
+        mainRef.current?.setAttribute("inert", "");
+        footerRef.current?.setAttribute("inert", "");
+      }
+    } else {
+      if (bodyRef.current) {
+        enableBodyScroll(bodyRef.current);
+        //Odblokowanie możliwości interakcji, jest to w przypadku, gdy drugi raz użytkownik przy pomocy klawiatury wciśnie koszyk
+        mainRef.current?.removeAttribute("inert");
+        footerRef.current?.removeAttribute("inert");
+      }
+    }
+  });
+
+  //Logowanie stan
+  const [openAuth, setOpenAuth] = useState(false);
+
+  useEffect(() => {
+    //Wyłączenie menu gdy któryś z modali jest aktywny
+    if (openAuth || openModal) {
+      handleBtnClose();
+    }
+  });
+
   return (
     <header className={styles.header}>
       <div className={`wrapper ${styles.container}`}>
@@ -151,16 +163,33 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
               <CategoryCardList listType="menu" />
             </div>
           </div>
-          <button
-            className={`${styles["container__nav-button"]} ${styles["container__cart-button"]}`}
-            onClick={handleModal}
-          >
-            <Cart />
-          </button>
+          <div className={`${styles["container__auth-and-cart-buttons"]}`}>
+            <button
+              type="button"
+              className={`${styles["container__nav-button"]}`}
+              aria-label="Login"
+              onClick={() => {
+                setOpenAuth(true);
+                setOpenModal(false);
+              }}
+            >
+              <IconAuth />
+            </button>
+            <button
+              type="button"
+              className={`${styles["container__nav-button"]} ${styles["container__cart-button"]}`}
+              onClick={handleModal}
+              aria-label="Shopping Cart"
+            >
+              <Cart />
+            </button>
+          </div>
         </nav>
+
         {openModal && (
           <CartModal openModal={openModal} setOpenModal={setOpenModal} />
         )}
+        {openAuth && <AuthModal open={openAuth} setOpen={setOpenAuth} />}
       </div>
     </header>
   );
