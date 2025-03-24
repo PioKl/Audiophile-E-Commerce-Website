@@ -66,8 +66,12 @@
     }
   }
 
-  &__cart-button {
+  &__auth-and-cart-buttons {
+    display: flex;
+    gap: 1rem;
+
     @include tablet {
+      gap: 4.2rem;
       margin-left: auto;
     }
     @include desktopSmall {
