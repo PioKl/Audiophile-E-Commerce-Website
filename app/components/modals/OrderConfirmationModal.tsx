@@ -1,6 +1,7 @@
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
-import styles from "@/styles/modals/orderConfirmation.module.scss";
+import styles from "@/styles/ui/muiModal.module.scss";
+import stylesOrder from "@/styles/modals/orderConfirmation.module.scss";
 import IconOrderConfirmation from "@/assets/checkout/icon-order-confirmation.svg";
 import Image from "next/image";
 import Button from "../Button";
@@ -28,47 +29,51 @@ export default function OrderConfirmationModal({
       className={`${styles["modal"]}`}
       slotProps={{ backdrop: { style: { backgroundColor: "transparent" } } }}
     >
-      <Box className={`${styles["order-container"]}`}>
+      <Box className={`${styles["modal-box-container"]}`}>
         <IconOrderConfirmation />
-        <h3 className={`${styles["order-container__heading"]}`}>
+        <h3 className={`${styles["modal-box-container__heading"]}`}>
           Thank you for your order
         </h3>
-        <p className={`${styles["order-container__info"]}`}>
+        <p className={`${styles["modal-box-container__info"]}`}>
           You will receive an email confirmation shortly.
         </p>
-        <div className={`${styles["order"]}`}>
-          <div className={`${styles["order__product-container"]}`}>
-            <div className={`${styles["order__product-image-and-details"]}`}>
+        <div className={`${stylesOrder["order"]}`}>
+          <div className={`${stylesOrder["order__product-container"]}`}>
+            <div
+              className={`${stylesOrder["order__product-image-and-details"]}`}
+            >
               <Image
-                className={`${styles["order__product-image"]}`}
+                className={`${stylesOrder["order__product-image"]}`}
                 src={imageOne}
                 alt="product-image"
                 width={50}
                 height={50}
               />
-              <div className={`${styles["order__product-details"]}`}>
-                <span className={`${styles["order__product-name"]}`}>
+              <div className={`${stylesOrder["order__product-details"]}`}>
+                <span className={`${stylesOrder["order__product-name"]}`}>
                   XX99 MK II
                 </span>
-                <span className={`${styles["order__product-cost"]}`}>
+                <span className={`${stylesOrder["order__product-cost"]}`}>
                   $ 2,999
                 </span>
-                <span className={`${styles["order__product-quantity"]}`}>
+                <span className={`${stylesOrder["order__product-quantity"]}`}>
                   x1
                 </span>
               </div>
             </div>
 
-            <span className={`${styles["order__rest-of-products"]}`}>
+            <span className={`${stylesOrder["order__rest-of-products"]}`}>
               and 2 other item(s)
             </span>
           </div>
 
-          <div className={`${styles["order__summary"]}`}>
-            <span className={`${styles["order__summary-price-category"]}`}>
+          <div className={`${stylesOrder["order__summary"]}`}>
+            <span className={`${stylesOrder["order__summary-price-category"]}`}>
               Grand Total
             </span>
-            <span className={`${styles["order__summary-price"]}`}>$ 5,446</span>
+            <span className={`${stylesOrder["order__summary-price"]}`}>
+              $ 5,446
+            </span>
           </div>
         </div>
 
