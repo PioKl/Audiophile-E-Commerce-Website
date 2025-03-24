@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Summary from "./Summary";
 import IconCashOnDelivery from "@/assets/checkout/icon-cash-on-delivery.svg";
-import styles from "@/styles/checkout/formCheckout.module.scss";
+import styles from "@/styles/ui/form.module.scss";
 
 export default function FormCheckout() {
   const [paymentMethod, setPaymentMethod] = useState<string>("e-money");
@@ -166,7 +166,7 @@ export default function FormCheckout() {
                 <input
                   className={`${styles["inputs__input"]}`}
                   id="mail"
-                  type="text"
+                  type="email"
                   placeholder="alexei@mail.com"
                   value={values.email}
                   onChange={(e) =>
