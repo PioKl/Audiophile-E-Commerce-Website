@@ -1,15 +1,17 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import Logo from "@/assets/shared/desktop/logo.svg";
 import BurgerMenu from "@/assets/shared/tablet/icon-hamburger.svg";
 import Cart from "@/assets/shared/desktop/icon-cart.svg";
 import IconAuth from "@/assets/shared/desktop/icon-auth.svg";
+import IconLogout from "@/assets/shared/desktop/icon-logout.svg";
 import styles from "@/styles/ui/header.module.scss";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import CategoryCardList from "./CategoryCardList";
 import { CartModal } from "../modals/CartModal";
 import AuthModal from "../modals/AuthModal";
+import AuthContext from "@/contexts/AuthContext";
 
 interface HeaderProps {
   mainRef: React.RefObject<HTMLDivElement | null>;
@@ -17,6 +19,7 @@ interface HeaderProps {
 }
 
 export default function Header({ mainRef, footerRef }: HeaderProps) {
+  const { isUserLoggedIn, logout } = useContext(AuthContext);
   const bodyRef = useRef<HTMLBodyElement>(null);
   const btnOpen = useRef<HTMLButtonElement>(null);
   const btnClose = useRef<HTMLButtonElement>(null);
@@ -164,17 +167,32 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
             </div>
           </div>
           <div className={`${styles["container__auth-and-cart-buttons"]}`}>
-            <button
-              type="button"
-              className={`${styles["container__nav-button"]}`}
-              aria-label="Login"
-              onClick={() => {
-                setOpenAuth(true);
-                setOpenModal(false);
-              }}
-            >
-              <IconAuth />
-            </button>
+            {isUserLoggedIn ? (
+              <button
+                type="button"
+                className={`${styles["container__nav-button"]}`}
+                aria-label="Logout"
+                onClick={() => {
+                  logout();
+                  setOpenModal(false);
+                }}
+              >
+                <IconLogout />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className={`${styles["container__nav-button"]}`}
+                aria-label="Login"
+                onClick={() => {
+                  setOpenAuth(true);
+                  setOpenModal(false);
+                }}
+              >
+                <IconAuth />
+              </button>
+            )}
+
             <button
               type="button"
               className={`${styles["container__nav-button"]} ${styles["container__cart-button"]}`}
