@@ -12,6 +12,7 @@ import CategoryCardList from "./CategoryCardList";
 import { CartModal } from "../modals/CartModal";
 import AuthModal from "../modals/AuthModal";
 import AuthContext from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 interface HeaderProps {
   mainRef: React.RefObject<HTMLDivElement | null>;
@@ -175,6 +176,7 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
                 onClick={() => {
                   logout();
                   setOpenModal(false);
+                  toast.success("Logged out");
                 }}
               >
                 <IconLogout />
