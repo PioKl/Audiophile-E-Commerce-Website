@@ -6,6 +6,7 @@ import stylesForm from "@/styles/ui/form.module.scss";
 import Button from "../Button";
 import axios from "axios";
 import AuthContext from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:5000",
@@ -75,6 +76,8 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
       localStorage.setItem("token", token);
       setIsUserLoggedIn(true);
       handleClose(); // Zamknięcie modala po sukcesie
+      //Toast potwierdzający zalogowanie/zarejestrowanie
+      toast.success(isLogin ? "Logged in" : "Signed up");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const backendErrors = error.response.data;
