@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./styles/base/globals.scss";
 import ClientLayout from "./components/ClientLayout";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
           className={`${manrope.className}`}
           suppressHydrationWarning={true}
         >
+          <ToastContainer />
           <div id="modal-hook"></div> {/* dla sposobu bez mui modal */}
           <ClientLayout>{children}</ClientLayout>
         </body>
