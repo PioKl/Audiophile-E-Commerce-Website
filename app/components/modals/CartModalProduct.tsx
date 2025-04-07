@@ -32,8 +32,8 @@ export default function CartModalProduct({
         toast.success("Product removed from cart");
       }
     } catch (error) {
-      console.log("Quantity descrease failed, something went wrong:", error);
-      toast.error("Quantity descrease failed, something went wrong");
+      console.log("Quantity decrease failed, something went wrong:", error);
+      toast.error("Quantity decrease failed, something went wrong");
       setCounter(prevCounter); //Gdyby coś poszło nie tak, niech wstawi poprzednią wartość, która była przed update
       await refreshCart();
     }
