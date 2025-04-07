@@ -14,6 +14,7 @@ export interface CategoryProduct {
 }
 
 export interface ProductDetails {
+  id: number;
   image: ProductImage;
   new: boolean;
   name: string;
@@ -42,4 +43,11 @@ export interface Gallery {
   first: ProductImage;
   second: ProductImage;
   third: ProductImage;
+}
+
+export interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
 }
