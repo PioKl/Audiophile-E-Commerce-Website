@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type AuthContextType = {
   isUserLoggedIn: boolean;
@@ -17,11 +18,17 @@ const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const router = useRouter();
 
   const logout = useCallback(() => {
+    //Token wygasł, wyloguj użytkownika
     localStorage.removeItem("token");
     setIsUserLoggedIn(false);
-  }, [setIsUserLoggedIn]);
+    // Jeśli użytkownik jest na chronionej trasie, cofnij go
+    if (window.location.pathname === "/checkout") {
+      router.back();
+    }
+  }, [setIsUserLoggedIn, router]);
 
   //Sprawdzenie ważności tokena
   const checkTokenValidity = useCallback(() => {
@@ -35,19 +42,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (isTokenValid) {
           setIsUserLoggedIn(true);
         } else {
-          //Token wygasł, wyloguj użytkownika
-          localStorage.removeItem("token");
           logout(); //Wylogowanie użytkownika
         }
       } catch (error) {
         console.error("Invaild token", error);
-        localStorage.removeItem("token");
         logout(); //Wylogowanie użytkownika
       }
     } else {
       setIsUserLoggedIn(false);
+      // Jeśli użytkownik jest na chronionej trasie, cofnij go
+      if (window.location.pathname === "/checkout") {
+        router.back();
+      }
     }
-  }, [logout]);
+  }, [logout, router]);
 
   useEffect(() => {
     checkTokenValidity(); //Sprawdza ważność tokena na początku
