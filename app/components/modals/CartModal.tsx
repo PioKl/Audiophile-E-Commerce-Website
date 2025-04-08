@@ -1,7 +1,7 @@
 //Wersja z własnym modalem
 
 import { Modal } from "@/components/ui/Modal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "@/styles/modals/cartModal.module.scss";
 import Button from "../Button";
 import { CartItem } from "@/interfaces/interfaces";
@@ -9,6 +9,7 @@ import { getCart, removeAllProductsFromCart } from "@/utils/api";
 import data from "@/data/data.json";
 import CartModalProduct from "./CartModalProduct";
 import { toast } from "react-toastify";
+import AuthContext from "@/contexts/AuthContext";
 
 interface CartModalProps {
   openModal: boolean;
@@ -16,6 +17,7 @@ interface CartModalProps {
 }
 
 export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
+  const { isUserLoggedIn } = useContext(AuthContext);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const refreshCart = async () => {
@@ -24,8 +26,14 @@ export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
   };
 
   useEffect(() => {
-    refreshCart();
-  }, []);
+    if (isUserLoggedIn) {
+      refreshCart();
+    } else {
+      toast.error("You have to be logged in to manage cart", {
+        toastId: "auth-error",
+      });
+    }
+  }, [isUserLoggedIn]);
 
   const cartWithImageData = cart.map((cartItem) => {
     const matchingData = data.find(
@@ -94,13 +102,13 @@ export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
           <span className={`${styles["summary__price"]}`}>
             $ {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </span>
-          {/* <span className={`${styles["summary__price"]}`}>$ 5,396</span> */}
         </div>
         <Button
           buttonType="one"
           text="Checkout"
           isALink={true}
           link="/checkout"
+          disabled={!isUserLoggedIn ? true : false}
         />
       </div>
     </Modal>
