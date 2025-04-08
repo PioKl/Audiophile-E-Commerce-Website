@@ -7,6 +7,7 @@ interface NormalButtonProps {
   isInNav?: boolean; //Zwykłe przyciski z nawigacji są tworzone również na podstawie CategoryCard, gdyż CategoryCard jest używany w burgerMenu więc wystarczy, go trochę dostosować do wersji desktop, gdzie zostaje sam tekst z linkiem, więc jeśli jest w nawigacji to zostanie sam tekst z linkiem bez reszty elementów
   isALink: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 interface LinkButtonProps extends NormalButtonProps {
@@ -28,12 +29,19 @@ const Button: React.FC<ButtonProps> = ({
   isALink,
   link,
   onClick,
+  disabled,
 }) => {
   const buttonClass = `${styles["btn"]} ${styles[`--${buttonType}`]} ${
     isInNav && styles["--nav"]
-  }`;
+  } ${disabled && styles["--disabled"]}`;
   return isALink ? (
-    <Link href={link as string} prefetch={false} className={buttonClass}>
+    <Link
+      href={link as string}
+      prefetch={false}
+      className={buttonClass}
+      aria-disabled={disabled ? true : false}
+      tabIndex={disabled ? -1 : 0}
+    >
       {text}
     </Link>
   ) : (
