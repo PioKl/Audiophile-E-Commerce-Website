@@ -10,6 +10,7 @@ import data from "@/data/data.json";
 import CartModalProduct from "./CartModalProduct";
 import { toast } from "react-toastify";
 import AuthContext from "@/contexts/AuthContext";
+import { priceFormating } from "@/utils/formattingFunctions";
 
 interface CartModalProps {
   openModal: boolean;
@@ -100,7 +101,7 @@ export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
         <div className={`${styles["summary"]}`}>
           <span className={`${styles["summary__price-category"]}`}>Total</span>
           <span className={`${styles["summary__price"]}`}>
-            $ {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            $ {priceFormating(totalPrice)}
           </span>
         </div>
         <Button
