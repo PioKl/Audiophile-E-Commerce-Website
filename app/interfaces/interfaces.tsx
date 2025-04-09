@@ -51,3 +51,7 @@ export interface CartItem {
   price: number;
   quantity: number;
 }
+
+export interface ExtendedCartItem extends CartItem {
+  cartImage: string | null;
+}
