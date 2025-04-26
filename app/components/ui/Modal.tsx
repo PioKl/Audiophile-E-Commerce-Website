@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import styles from "@/styles/ui/modal.module.scss";
+import useIsElementVisible from "@/hooks/useIsElementVisible";
 
 interface ModalProps {
   openModal: boolean;
@@ -12,6 +13,7 @@ export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
   const bodyRef = useRef<HTMLBodyElement>(null);
   const modalHook = document.getElementById("modal-hook");
   const modalRef = useRef<HTMLDivElement>(null);
+  const isHeaderVisible = useIsElementVisible("header");
 
   useEffect(() => {
     bodyRef.current = document.body as HTMLBodyElement;
@@ -56,7 +58,9 @@ export const Modal = ({ openModal, setOpenModal, children }: ModalProps) => {
       <div className={`${styles["modal-container"]}`}>
         <div
           onClick={handleClose}
-          className={`${styles["modal-overlay"]}`}
+          className={`${styles["modal-overlay"]} ${
+            !isHeaderVisible ? styles["--full"] : ""
+          }`}
         ></div>
         <div className={`wrapper ${styles["modal-wrapper"]}`}>
           <div
