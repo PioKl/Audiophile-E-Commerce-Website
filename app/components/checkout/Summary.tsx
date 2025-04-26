@@ -1,51 +1,34 @@
 import styles from "@/styles/checkout/summary.module.scss";
 import Button from "../Button";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { getCart } from "@/utils/api";
-import { ExtendedCartItem } from "@/interfaces/interfaces";
-import data from "@/data/data.json";
+import { useEffect, useContext } from "react";
 import { priceFormating } from "@/utils/formattingFunctions";
-/* import OrderConfirmationModal from "../modals/OrderConfirmationModal"; */
+import { useCartWithImage } from "@/hooks/useCartWithImage";
+import OrderConfirmationModal from "../modals/OrderConfirmationModal";
+import CartContext from "@/contexts/CartContext";
 
-export default function Summary() {
-  const [cart, setCart] = useState<ExtendedCartItem[]>([]);
-  /*  const [openOrderConfirmation, setOpenOrderConfirmation] = useState(false); */
+interface SummaryProps {
+  openOrderConfirmation: boolean;
+  setOpenOrderConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Summary({
+  openOrderConfirmation,
+  setOpenOrderConfirmation,
+}: SummaryProps) {
+  const { cart, setCart, refreshCart } = useContext(CartContext);
 
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const data = await getCart();
-        setCart(data.cart);
-      } catch (error) {
-        console.error("Can't fetch data", error);
-      }
-    };
-    fetchCart();
-  }, [cart]);
+    refreshCart();
+  }, [setCart, refreshCart]);
 
-  const cartWithImageData = cart.map((cartItem) => {
-    const matchingData = data.find(
-      (dataItem) => dataItem.name === cartItem.name
-    );
-
-    return {
-      ...cartItem,
-      cartImage: matchingData ? matchingData.cartImage : null,
-    };
-  });
-
-  const shipping = 50;
-  const vat = 0.2; //20%
-
-  const totalPrice = cartWithImageData.reduce(
-    (total, currentValue) =>
-      (total = total + currentValue.price * currentValue.quantity),
-    0
-  );
-
-  const totalPriceWithShipping = totalPrice + shipping;
-  const includedVat = totalPrice * vat;
+  const {
+    cartWithImageData,
+    shipping,
+    totalPrice,
+    includedVat,
+    totalPriceWithShipping,
+  } = useCartWithImage(cart);
 
   return (
     <div className={`${styles["summary"]}`}>
@@ -116,24 +99,17 @@ export default function Summary() {
               </span>
             </li>
           </ul>
-          <Button
-            buttonType="one"
-            text="CONTINUE & PAY"
-            isALink={false}
-            /*             onClick={() => {
-              setOpenOrderConfirmation(true);
-            }} */
-          />
+          <Button buttonType="one" text="CONTINUE & PAY" isALink={false} />
         </>
       ) : (
-        <p>Cart is empty</p>
+        <span>Cart is empty</span>
       )}
-      {/*       {openOrderConfirmation && (
+      {openOrderConfirmation && (
         <OrderConfirmationModal
           open={openOrderConfirmation}
           setOpen={setOpenOrderConfirmation}
         />
-      )} */}
+      )}
     </div>
   );
 }
