@@ -1,6 +1,6 @@
 "use client";
 import { ProductDetails } from "@/interfaces/interfaces";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "@/styles/ui/productDetailsCard.module.scss";
 import Image from "next/image";
 import Button from "../Button";
@@ -8,6 +8,7 @@ import resolutions from "@/styles/base/resolutions.module.scss";
 import data from "@/data/data.json";
 import { addToCart } from "@/utils/api";
 import { toast } from "react-toastify";
+import CartContext from "@/contexts/CartContext";
 
 interface ProductDetailsCardProps {
   type: "details" | "also-like";
@@ -18,6 +19,7 @@ export default function ProductDetailsCard({
   type,
   productDetailsData,
 }: ProductDetailsCardProps) {
+  const { refreshCart } = useContext(CartContext);
   const { id, image, name, description, price, others } = productDetailsData;
 
   /*   const findCategoryAndAddIntoOthers = others.map((itemOthers) => {
@@ -50,6 +52,7 @@ export default function ProductDetailsCard({
     try {
       const newItem = { id: id, name: name, price: price, quantity: counter };
       await addToCart(newItem);
+      await refreshCart();
       toast.success("Product added to cart");
     } catch (error) {
       console.error("Error adding to cart:", error);
