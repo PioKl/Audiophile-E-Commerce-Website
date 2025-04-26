@@ -1,16 +1,16 @@
 //Wersja z własnym modalem
 
 import { Modal } from "@/components/ui/Modal";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import styles from "@/styles/modals/cartModal.module.scss";
 import Button from "../Button";
-import { CartItem } from "@/interfaces/interfaces";
-import { getCart, removeAllProductsFromCart } from "@/utils/api";
-import data from "@/data/data.json";
+import { removeAllProductsFromCart } from "@/utils/api";
 import CartModalProduct from "./CartModalProduct";
 import { toast } from "react-toastify";
 import AuthContext from "@/contexts/AuthContext";
+import CartContext from "@/contexts/CartContext";
 import { priceFormating } from "@/utils/formattingFunctions";
+import { useCartWithImage } from "@/hooks/useCartWithImage";
 
 interface CartModalProps {
   openModal: boolean;
@@ -19,12 +19,7 @@ interface CartModalProps {
 
 export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
   const { isUserLoggedIn } = useContext(AuthContext);
-  const [cart, setCart] = useState<CartItem[]>([]);
-
-  const refreshCart = async () => {
-    const data = await getCart();
-    setCart(data.cart);
-  };
+  const { cart, refreshCart } = useContext(CartContext);
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -34,24 +29,9 @@ export const CartModal = ({ openModal, setOpenModal }: CartModalProps) => {
         toastId: "auth-error",
       });
     }
-  }, [isUserLoggedIn]);
+  }, [isUserLoggedIn, refreshCart]);
 
-  const cartWithImageData = cart.map((cartItem) => {
-    const matchingData = data.find(
-      (dataItem) => dataItem.name === cartItem.name
-    );
-
-    return {
-      ...cartItem,
-      cartImage: matchingData ? matchingData.cartImage : null,
-    };
-  });
-
-  const totalPrice = cartWithImageData.reduce(
-    (total, currentValue) =>
-      (total = total + currentValue.price * currentValue.quantity),
-    0
-  );
+  const { cartWithImageData, totalPrice } = useCartWithImage(cart);
 
   const handleRemoveAllProductsFromCart = async () => {
     if (cart.length >= 1) {
