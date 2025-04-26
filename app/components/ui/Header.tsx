@@ -121,18 +121,18 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
     }
   });
 
-  //Logowanie stan
+  //Logowanie/Rejestracja - jego stan
   const [openAuth, setOpenAuth] = useState(false);
 
   useEffect(() => {
     //Wyłączenie menu gdy któryś z modali jest aktywny
     if (openAuth || openModal) {
-      handleBtnClose();
+      btnOpen.current?.setAttribute("aria-expanded", "false");
     }
   });
 
   return (
-    <header className={styles.header}>
+    <header id="header" className={styles.header}>
       <div className={`wrapper ${styles.container}`}>
         <nav className={styles["container__nav"]}>
           <button
