@@ -3,16 +3,22 @@ import { useState } from "react";
 import Summary from "./Summary";
 import IconCashOnDelivery from "@/assets/checkout/icon-cash-on-delivery.svg";
 import styles from "@/styles/ui/form.module.scss";
+import { CheckoutData } from "@/interfaces/interfaces";
+import { completeCheckout } from "@/utils/api";
 
 export default function FormCheckout() {
-  const [paymentMethod, setPaymentMethod] = useState<string>("e-money");
+  const [openOrderConfirmation, setOpenOrderConfirmation] = useState(false);
+
+  const [paymentMethod, setPaymentMethod] = useState<
+    "e-money" | "cash-on-delivery"
+  >("e-money");
   const handlePaymentMethod = (e: React.MouseEvent<HTMLInputElement>) => {
-    setPaymentMethod(e?.currentTarget.id);
+    setPaymentMethod(e.currentTarget.id as "e-money" | "cash-on-delivery");
   };
 
   const [errors, setErrors] = useState({
     name: false,
-    email: false,
+    emailAddress: false,
     phoneNumber: false,
     address: false,
     zipCode: false,
@@ -22,14 +28,15 @@ export default function FormCheckout() {
     eMoneyPin: false,
   });
 
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<CheckoutData>({
     name: "",
-    email: "",
+    emailAddress: "",
     phoneNumber: "",
     address: "",
     zipCode: "",
     city: "",
     country: "",
+    paymentMethod: "e-money", //Domyślna wartość
     eMoneyNumber: "",
     eMoneyPin: "",
   });
@@ -43,67 +50,63 @@ export default function FormCheckout() {
 
     const newErrors = {
       name: values.name === "",
-      email: values.email === "",
+      emailAddress: values.emailAddress === "",
       phoneNumber: values.phoneNumber === "",
       address: values.address === "",
       zipCode: values.zipCode === "",
       city: values.city === "",
       country: values.country === "",
-      eMoneyNumber: values.eMoneyNumber === "",
-      eMoneyPin: values.eMoneyPin === "",
+      eMoneyNumber: paymentMethod === "e-money" && values.eMoneyNumber === "",
+      eMoneyPin: paymentMethod === "e-money" && values.eMoneyPin === "",
     };
 
     if (
       newErrors.name ||
-      newErrors.email ||
+      newErrors.emailAddress ||
       newErrors.phoneNumber ||
       newErrors.address ||
       newErrors.zipCode ||
       newErrors.city ||
       newErrors.country ||
-      newErrors.eMoneyNumber ||
-      newErrors.eMoneyPin
+      (paymentMethod === "e-money" &&
+        (newErrors.eMoneyNumber || newErrors.eMoneyPin))
     ) {
       setErrors(newErrors);
     } else {
       //Mechanika enpointa, try await np. do api
       //----------------------------------
       //zresetowanie wartości
-      console.log(
-        values.name,
-        values.email,
-        values.phoneNumber,
-        values.address,
-        values.zipCode,
-        values.city,
-        values.country,
-        values.eMoneyNumber,
-        values.eMoneyPin
-      );
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        name: false,
-        email: false,
-        phoneNumber: false,
-        address: false,
-        zipCode: false,
-        city: false,
-        country: false,
-        eMoneyNumber: false,
-        eMoneyPin: false,
-      }));
-      setValues((prevValues) => ({
-        ...prevValues,
-        name: "",
-        email: "",
-        phoneNumber: "",
-        address: "",
-        zipCode: "",
-        city: "",
-        country: "",
-        eMoneyNumber: "",
-        eMoneyPin: "",
-      }));
+      try {
+        await completeCheckout({ ...values, paymentMethod });
+
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          name: false,
+          emailAddress: false,
+          phoneNumber: false,
+          address: false,
+          zipCode: false,
+          city: false,
+          country: false,
+          eMoneyNumber: false,
+          eMoneyPin: false,
+        }));
+        setValues((prevValues) => ({
+          ...prevValues,
+          name: "",
+          emailAddress: "",
+          phoneNumber: "",
+          address: "",
+          zipCode: "",
+          city: "",
+          country: "",
+          eMoneyNumber: "",
+          eMoneyPin: "",
+        }));
+        setOpenOrderConfirmation(true);
+      } catch (error) {
+        console.error("Error during checkout:", error);
+      }
     }
   };
 
@@ -149,14 +152,14 @@ export default function FormCheckout() {
               <label
                 htmlFor="mail"
                 className={`${styles["inputs__label"]} ${
-                  errors.email && styles["--error"]
+                  errors.emailAddress && styles["--error"]
                 }`}
               >
                 <div className={`${styles["inputs__label-title-container"]}`}>
                   <span className={`${styles["inputs__label-title"]}`}>
                     Email Address
                   </span>
-                  {errors.email && (
+                  {errors.emailAddress && (
                     <span className={`${styles["inputs__label-error"]}`}>
                       {messages.textFieldError}
                     </span>
@@ -168,9 +171,9 @@ export default function FormCheckout() {
                   id="mail"
                   type="email"
                   placeholder="alexei@mail.com"
-                  value={values.email}
+                  value={values.emailAddress}
                   onChange={(e) =>
-                    setValues({ ...values, email: e.target.value })
+                    setValues({ ...values, emailAddress: e.target.value })
                   }
                 />
               </label>
@@ -458,7 +461,10 @@ export default function FormCheckout() {
           </div>
         </div>
       </div>
-      <Summary />
+      <Summary
+        openOrderConfirmation={openOrderConfirmation}
+        setOpenOrderConfirmation={setOpenOrderConfirmation}
+      />
     </form>
   );
 }
