@@ -28,6 +28,12 @@
     height: 100%;
     background-color: var(--c-background-transparent);
   }
+
+  &.--full {
+    &:after {
+      top: 0rem;
+    }
+  }
 }
 
 .modal-wrapper {

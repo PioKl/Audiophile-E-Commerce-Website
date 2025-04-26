@@ -19,6 +19,12 @@
         display: block;
       }
     }
+
+    &.--full {
+      &:after {
+        top: 0rem;
+      }
+    }
   }
 }
 
