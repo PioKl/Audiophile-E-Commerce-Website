@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CartItem } from "@/interfaces/interfaces";
+import { CartItem, CheckoutData } from "@/interfaces/interfaces";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
@@ -43,4 +43,16 @@ export const removeAllProductsFromCart = async () => {
 export const getCart = async () => {
   const response = await api.get("/api/cart/cart"); //tylko tu inna ścieżka tak dla rożróżnienia
   return response.data;
+};
+
+export const completeCheckout = async (checkoutData: CheckoutData) => {
+  console.log("Sending checkoutData:", { checkoutData });
+  const response = await api.post("/api/checkout/checkout", { checkoutData });
+  return response.data;
+};
+
+// Nowa funkcja do pobierania ostatniego zamówienia
+export const getLastOrder = async () => {
+  const response = await api.get("/api/checkout/last-order");
+  return response.data.order;
 };
