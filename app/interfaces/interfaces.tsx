@@ -55,3 +55,16 @@ export interface CartItem {
 export interface ExtendedCartItem extends CartItem {
   cartImage: string | null;
 }
+
+export interface CheckoutData {
+  name: string;
+  emailAddress: string;
+  phoneNumber: string;
+  address: string;
+  zipCode: string;
+  city: string;
+  country: string;
+  paymentMethod: "e-money" | "cash-on-delivery";
+  eMoneyNumber?: string;
+  eMoneyPin?: string;
+}
