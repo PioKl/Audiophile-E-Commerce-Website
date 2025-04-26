@@ -7,6 +7,7 @@ import Button from "../Button";
 import axios from "axios";
 import AuthContext from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
+import useIsElementVisible from "@/hooks/useIsElementVisible";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:5000",
@@ -18,6 +19,7 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ open, setOpen }: AuthModalProps) {
+  const isHeaderVisible = useIsElementVisible("header");
   const { setIsUserLoggedIn } = useContext(AuthContext);
   const handleClose = () => setOpen(false);
 
@@ -132,7 +134,9 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       disableScrollLock={false}
-      className={`${styles["modal"]}`}
+      className={`${styles["modal"]} ${
+        !isHeaderVisible ? styles["--full"] : ""
+      }`}
       slotProps={{ backdrop: { style: { backgroundColor: "transparent" } } }}
     >
       <Box className={`${styles["modal-box-container"]}`}>
