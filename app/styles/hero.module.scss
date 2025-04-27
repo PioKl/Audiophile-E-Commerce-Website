@@ -5,7 +5,6 @@
   background-image: url(../assets/home/mobile/image-header.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  /* background-size: contain; */
   background-color: #191919;
 
   background-size: 35rem;
@@ -15,7 +14,6 @@
     height: 63.9rem;
     background-image: url(../assets/home/tablet/image-header.jpg);
     background-size: 81rem;
-    //background-position-y: 81%;
     background-position-y: 87%;
   }
   @include desktopSmall {
