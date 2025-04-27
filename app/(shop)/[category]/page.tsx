@@ -30,13 +30,9 @@ export default async function Category({
     (a, b) => +b.new - +a.new
   ); //+b.new i +a.new - konwersja boolean na number 1 to true, 0 to false
 
-  //console.log(sortCategoryDataByNewProduct);
-
   if (sortCategoryDataByNewProduct.length === 0) {
     notFound(); // Jeśli nie ma kategorii, wtedy notFound
   }
-
-  console.log(sortCategoryDataByNewProduct);
 
   return (
     <>
