@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 import type { RuleSetRule } from "webpack"; //Type z Webpacka
 
 const nextConfig: NextConfig = {
+  env: {
+    // Warunkowe ustawienie zmiennej na podstawie środowiska
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find(
