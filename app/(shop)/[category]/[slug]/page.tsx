@@ -31,8 +31,6 @@ export default async function ProductDetails({
       item.slug === resolvedParams.slug
   );
 
-  console.log(categoryWithSlugData);
-
   if (!categoryWithSlugData) {
     notFound(); // Jeśli nie ma kategorii, wtedy notFound
   }
