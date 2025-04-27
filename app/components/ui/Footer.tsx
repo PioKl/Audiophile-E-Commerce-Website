@@ -11,7 +11,6 @@ interface FooterProps {
 }
 
 export default function Footer({ footerRef, categories }: FooterProps) {
-  console.log(categories);
   return (
     <footer ref={footerRef} className={styles.footer}>
       <div className={`wrapper ${styles.container}`}>
