@@ -1,12 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Summary from "./Summary";
 import IconCashOnDelivery from "@/assets/checkout/icon-cash-on-delivery.svg";
 import styles from "@/styles/ui/form.module.scss";
 import { CheckoutData } from "@/interfaces/interfaces";
 import { completeCheckout } from "@/utils/api";
+import {
+  emailRegex,
+  phoneRegex,
+  zipCodeRegex,
+  eMoneyRegex,
+} from "@/utils/regex";
+import CartContext from "@/contexts/CartContext";
 
 export default function FormCheckout() {
+  const { refreshCart } = useContext(CartContext);
   const [openOrderConfirmation, setOpenOrderConfirmation] = useState(false);
 
   const [paymentMethod, setPaymentMethod] = useState<
@@ -50,14 +58,27 @@ export default function FormCheckout() {
 
     const newErrors = {
       name: values.name === "",
-      emailAddress: values.emailAddress === "",
-      phoneNumber: values.phoneNumber === "",
+      emailAddress:
+        values.emailAddress === "" || !emailRegex.test(values.emailAddress),
+      phoneNumber:
+        values.phoneNumber === "" || !phoneRegex.test(values.phoneNumber),
       address: values.address === "",
-      zipCode: values.zipCode === "",
+      zipCode:
+        values.zipCode === "" ||
+        (!zipCodeRegex.standard.test(values.zipCode) &&
+          !zipCodeRegex.withoutDash.test(values.zipCode)),
       city: values.city === "",
       country: values.country === "",
-      eMoneyNumber: paymentMethod === "e-money" && values.eMoneyNumber === "",
-      eMoneyPin: paymentMethod === "e-money" && values.eMoneyPin === "",
+      eMoneyNumber:
+        paymentMethod === "e-money" &&
+        (!values.eMoneyNumber ||
+          values.eMoneyNumber === "" ||
+          !eMoneyRegex.test(values.eMoneyNumber)),
+      eMoneyPin:
+        paymentMethod === "e-money" &&
+        (!values.eMoneyPin ||
+          values.eMoneyPin === "" ||
+          !eMoneyRegex.test(values.eMoneyPin)), //!values.eMoneyPin || values.eMoneyPin === "" w celu zapobiegnięciu błędu o undefined
     };
 
     if (
@@ -103,6 +124,7 @@ export default function FormCheckout() {
           eMoneyNumber: "",
           eMoneyPin: "",
         }));
+        refreshCart();
         setOpenOrderConfirmation(true);
       } catch (error) {
         console.error("Error during checkout:", error);
@@ -405,6 +427,9 @@ export default function FormCheckout() {
                       className={`${styles["inputs__input"]}`}
                       id="e-money-number"
                       type="text"
+                      minLength={9}
+                      maxLength={9}
+                      inputMode="numeric" // Klawiatura numeryczna na urządzeniach mobilnych
                       placeholder="238521993"
                       value={values.eMoneyNumber}
                       onChange={(e) =>
@@ -436,6 +461,9 @@ export default function FormCheckout() {
                       className={`${styles["inputs__input"]}`}
                       id="e-money-pin"
                       type="text"
+                      minLength={4}
+                      maxLength={4}
+                      inputMode="numeric" // Klawiatura numeryczna na urządzeniach mobilnych
                       placeholder="6891"
                       value={values.eMoneyPin}
                       onChange={(e) =>
