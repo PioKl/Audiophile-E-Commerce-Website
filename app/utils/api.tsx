@@ -2,7 +2,7 @@ import axios from "axios";
 import { CartItem, CheckoutData } from "@/interfaces/interfaces";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // Użycie zmiennej środowiskowej
   headers: {
     "Content-Type": "application/json",
   },
