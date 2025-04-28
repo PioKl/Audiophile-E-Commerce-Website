@@ -9,6 +9,7 @@ import data from "@/data/data.json";
 import { addToCart } from "@/utils/api";
 import { toast } from "react-toastify";
 import CartContext from "@/contexts/CartContext";
+import { motion } from "framer-motion";
 
 interface ProductDetailsCardProps {
   type: "details" | "also-like";
@@ -78,7 +79,15 @@ export default function ProductDetailsCard({
   return (
     <>
       {type === "details" && (
-        <div className={`${styles["product-card"]}`}>
+        <motion.div
+          className={`${styles["product-card"]}`}
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
+        >
           <div className={`${styles["product-card__image-container"]}`}>
             <picture>
               <source
@@ -152,11 +161,20 @@ export default function ProductDetailsCard({
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
       {type === "also-like" &&
         others.map((item, id) => (
-          <li className={styles["product-card__also-like-card-item"]} key={id}>
+          <motion.li
+            className={styles["product-card__also-like-card-item"]}
+            key={id}
+            viewport={{ once: true }}
+            initial={{ opacity: 0 }}
+            whileInView={{
+              opacity: 1,
+              transition: { duration: 0.75, ease: "easeIn" },
+            }}
+          >
             <div
               className={`${styles["product-card__image-container"]} ${
                 styles[`--${type}`]
@@ -198,7 +216,7 @@ export default function ProductDetailsCard({
                 link={`/${findCategoryForOthers[id]}/${item.slug}`}
               />
             </div>
-          </li>
+          </motion.li>
         ))}
     </>
   );

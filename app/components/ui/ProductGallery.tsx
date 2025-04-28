@@ -1,7 +1,9 @@
+"use client";
 import { Gallery } from "@/interfaces/interfaces";
 import resolutions from "@/styles/base/resolutions.module.scss";
 import styles from "@/styles/ui/productGallery.module.scss";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ProductGalleryProps {
   gallery: Gallery;
@@ -9,7 +11,15 @@ interface ProductGalleryProps {
 
 export default function ProductGallery({ gallery }: ProductGalleryProps) {
   return (
-    <div className={styles["product-gallery"]}>
+    <motion.div
+      className={styles["product-gallery"]}
+      viewport={{ once: true }}
+      initial={{ opacity: 0 }}
+      whileInView={{
+        opacity: 1,
+        transition: { duration: 0.75, ease: "easeIn" },
+      }}
+    >
       <ul className={styles["product-gallery__items-list"]}>
         {Object.values(gallery).map((item, id) => (
           <li
@@ -40,6 +50,6 @@ export default function ProductGallery({ gallery }: ProductGalleryProps) {
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }

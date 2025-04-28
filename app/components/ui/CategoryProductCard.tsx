@@ -1,8 +1,10 @@
+"use client";
 import { CategoryProduct } from "@/interfaces/interfaces";
 import styles from "@/styles/ui/categoryProductCard.module.scss";
 import Image from "next/image";
 import Button from "../Button";
 import resolutions from "@/styles/base/resolutions.module.scss";
+import { motion } from "framer-motion";
 
 interface CategoryProductCardProps {
   productCardData: CategoryProduct;
@@ -14,7 +16,15 @@ export default function CategoryProductCard({
   const { name, description, category, slug, categoryImage } = productCardData;
 
   return (
-    <li className={`${styles["product-card"]}`}>
+    <motion.li
+      className={`${styles["product-card"]}`}
+      viewport={{ once: true }}
+      initial={{ opacity: 0 }}
+      whileInView={{
+        opacity: 1,
+        transition: { duration: 0.75, ease: "easeIn" },
+      }}
+    >
       <div className={`${styles["product-card__image-container"]}`}>
         <picture>
           <source
@@ -56,6 +66,6 @@ export default function CategoryProductCard({
           link={`${category}/${slug}`}
         />
       </div>
-    </li>
+    </motion.li>
   );
 }

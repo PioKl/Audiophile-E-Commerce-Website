@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import resolutions from "@/styles/base/resolutions.module.scss";
 import styles from "@/styles/ui/featureBlock.module.scss";
+import { motion } from "framer-motion";
 
 interface FeatureBlockProps {
   heading: string;
@@ -55,7 +57,15 @@ export default function FeatureBlock({
   };
 
   return (
-    <div className={`${styles.feature}`}>
+    <motion.div
+      className={`${styles.feature}`}
+      viewport={{ once: true }}
+      initial={{ opacity: 0 }}
+      whileInView={{
+        opacity: 1,
+        transition: { duration: 0.75, ease: "easeIn" },
+      }}
+    >
       <div className={styles["feature__image-container"]}>
         <picture>
           <source
@@ -84,6 +94,6 @@ export default function FeatureBlock({
         </h2>
         <p className={styles["feature__info-text"]}>{text}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,7 +1,9 @@
+"use client";
 import data from "@/data/data.json";
 import Link from "next/link";
 import CategoryCard from "./CategoryCard";
 import styles from "@/styles/ui/categoryCardList.module.scss";
+import { motion } from "framer-motion";
 
 interface CategoryCardListProps {
   listType: "normal" | "menu";
@@ -20,11 +22,19 @@ export default function CategoryCardList({ listType }: CategoryCardListProps) {
 
   return listType === "normal" ? (
     <>
-      <ul className={`${styles["card-list"]} ${styles[`--${listType}`]}`}>
+      <motion.ul
+        className={`${styles["card-list"]} ${styles[`--${listType}`]}`}
+        viewport={{ once: true }}
+        initial={{ opacity: 0 }}
+        whileInView={{
+          opacity: 1,
+          transition: { duration: 0.75, ease: "easeIn" },
+        }}
+      >
         {uniqueCategorysWithImage.map((item, id) => (
           <CategoryCard type="normal" key={id} categoriesWithImage={item} />
         ))}
-      </ul>
+      </motion.ul>
     </>
   ) : (
     <>

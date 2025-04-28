@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "../Button";
 import { useMediaQuery } from "@mui/material";
 import resolutions from "@/styles/base/resolutions.module.scss";
+import { motion } from "framer-motion";
 
 interface ProductBannerProps {
   type: "one" | "two" | "three";
@@ -56,7 +57,15 @@ export default function ProductBanner({
   return (
     <>
       {type === "one" && (
-        <div className={`wrapper ${styles["product-banner"]}`}>
+        <motion.div
+          className={`wrapper ${styles["product-banner"]}`}
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
+        >
           <div className={styles["product-banner__container"]}>
             <div className={styles["product-banner__image-container"]}>
               <picture>
@@ -96,16 +105,22 @@ export default function ProductBanner({
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
       {type === "two" && (
-        <div
+        <motion.div
           style={{
             backgroundImage,
           }}
           className={`wrapper ${styles["product-banner"]} ${
             styles[`--${type}`]
           }`}
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
         >
           <div
             className={`${styles["product-banner__container"]} ${
@@ -133,13 +148,19 @@ export default function ProductBanner({
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
       {type === "three" && (
-        <div
+        <motion.div
           className={`wrapper ${styles["product-banner"]} ${
             styles[`--${type}`]
           }`}
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
         >
           <div
             className={`${styles["product-banner__container"]} ${
@@ -176,7 +197,7 @@ export default function ProductBanner({
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );

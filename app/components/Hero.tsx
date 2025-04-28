@@ -1,12 +1,22 @@
 import React from "react";
 import styles from "@/styles/hero.module.scss";
 import Button from "./Button";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
       <div className={`wrapper ${styles["hero__container"]}`}>
-        <div className={`${styles["hero__content"]}`}>
+        <motion.div
+          className={`${styles["hero__content"]}`}
+          viewport={{ once: true }}
+          initial={{ opacity: 0, y: "10%" }}
+          whileInView={{
+            y: "0",
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
+        >
           <span className={`overline ${styles["hero__product-status"]}`}>
             New Product
           </span>
@@ -23,7 +33,7 @@ export default function Hero() {
             isALink={true}
             link={`/headphones/xx99-mark-two-headphones`}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

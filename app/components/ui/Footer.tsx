@@ -4,6 +4,7 @@ import IconFacebook from "@/assets/shared/desktop/icon-facebook.svg";
 import IconTwitter from "@/assets/shared/desktop/icon-twitter.svg";
 import IconInstagram from "@/assets/shared/desktop/icon-instagram.svg";
 import styles from "@/styles/ui/footer.module.scss";
+import { motion } from "framer-motion";
 
 interface FooterProps {
   footerRef: React.RefObject<HTMLDivElement | null>;
@@ -14,7 +15,15 @@ export default function Footer({ footerRef, categories }: FooterProps) {
   return (
     <footer ref={footerRef} className={styles.footer}>
       <div className={`wrapper ${styles.container}`}>
-        <nav className={styles["container__nav"]}>
+        <motion.nav
+          className={styles["container__nav"]}
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
+        >
           <Link href="/">
             <Logo />
           </Link>
@@ -32,8 +41,17 @@ export default function Footer({ footerRef, categories }: FooterProps) {
               </li>
             ))}
           </ul>
-        </nav>
-        <div className={styles["container__description-and-social"]}>
+        </motion.nav>
+        <motion.div
+          className={styles["container__description-and-social"]}
+          viewport={{ once: true }}
+          initial={{ opacity: 0, y: "10%" }}
+          whileInView={{
+            y: "0",
+            opacity: 1,
+            transition: { duration: 0.75, ease: "easeIn" },
+          }}
+        >
           <p className={`${styles["container__description"]}`}>
             Audiophile is an all in one stop to fulfill your audio needs.
             We&apos;re a small team of music lovers and sound specialists who
@@ -60,7 +78,7 @@ export default function Footer({ footerRef, categories }: FooterProps) {
               </Link>
             </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

@@ -13,6 +13,7 @@ import { CartModal } from "../modals/CartModal";
 import AuthModal from "../modals/AuthModal";
 import AuthContext from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 interface HeaderProps {
   mainRef: React.RefObject<HTMLDivElement | null>;
@@ -163,9 +164,17 @@ export default function Header({ mainRef, footerRef }: HeaderProps) {
             aria-labelledby="nav-label"
             ref={navMenu}
           >
-            <div className={styles["nav-menu__item-list-container"]}>
+            <motion.div
+              className={styles["nav-menu__item-list-container"]}
+              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{
+                opacity: 1,
+                transition: { duration: 0.75, ease: "easeOut" },
+              }}
+            >
               <CategoryCardList listType="menu" />
-            </div>
+            </motion.div>
           </div>
           <div className={`${styles["container__auth-and-cart-buttons"]}`}>
             {isUserLoggedIn ? (
