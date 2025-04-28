@@ -1,3 +1,4 @@
+import apiClient from "@/utils/apiClient";
 import { Modal } from "@mui/material";
 import { useState, useContext } from "react";
 import Box from "@mui/material/Box";
@@ -8,10 +9,6 @@ import axios from "axios";
 import AuthContext from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
 import useIsElementVisible from "@/hooks/useIsElementVisible";
-
-const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // Użycie zmiennej środowiskowej
-});
 
 interface AuthModalProps {
   open: boolean;
