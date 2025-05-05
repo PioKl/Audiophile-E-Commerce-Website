@@ -1,10 +1,14 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import styles from "@/styles/ui/loader.module.scss";
 
-export default function Loader() {
+interface LoaderProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export default function Loader({ className }: LoaderProps) {
   return (
     <div className={`${styles["loader-container"]}`}>
-      <div className={`${styles["loader"]}`}></div>
+      <div className={`${styles["loader"]} ${className}`}></div>
     </div>
   );
 }
