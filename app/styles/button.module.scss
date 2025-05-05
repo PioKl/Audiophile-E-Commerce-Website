@@ -83,4 +83,9 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  &.--with-loader {
+    position: relative;
+    min-height: 4.8rem;
+  }
 }
