@@ -21,6 +21,7 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
   const handleClose = () => setOpen(false);
 
   const [isLogin, setIsLogin] = useState(true); //logowanie, bądź rejestracja
+  const [loader, setLoader] = useState(false); //loader przy logowaniu/rejestracji podczas oczekiwania na odpowiedź serwera
 
   const [values, setValues] = useState({
     email: "",
@@ -57,6 +58,7 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
     );
 
     try {
+      setLoader(true);
       const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
 
       //dane do wysłania
@@ -78,6 +80,7 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
       //Toast potwierdzający zalogowanie/zarejestrowanie
       toast.success(isLogin ? "Logged in" : "Signed up");
     } catch (error) {
+      setLoader(false);
       if (axios.isAxiosError(error) && error.response) {
         const backendErrors = error.response.data;
         //Błąd serwera lub inny ogólny komunikat
@@ -289,6 +292,8 @@ export default function AuthModal({ open, setOpen }: AuthModalProps) {
             buttonType="one"
             text={isLogin ? "Login" : "Create an account"}
             isALink={false}
+            isButtonWithLoader={true}
+            loader={loader}
           />
         </form>
         <p className={`${styles["modal-box-container__info"]}`}>
