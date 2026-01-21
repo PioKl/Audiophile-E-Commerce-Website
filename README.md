@@ -41,7 +41,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/PioKl/Audiophile-E-Commerce-Website]
-- Live Site URL: [https://audiophile-e-commerce-website-phi.vercel.app/]
+- Live Site URL: [https://audiophile-e-commerce-website-mu.vercel.app/]
 
 ## My process
 
